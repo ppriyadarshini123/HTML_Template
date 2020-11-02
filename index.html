@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>PHP PROJECT| HOME</title>
+        <link rel="stylesheet" href="https://use.typekit.net/vnj5wbt.css"><!-- Special Font used in e.g. Search -->
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">        
+        <link rel="stylesheet" href="./build/css/main.css" media="screen"/>
+        <link rel="shortcut icon" type="image/x-icon" href=""/>
+        <meta name="author" content="Payal"/>
+        <meta name="description" content="php project"/>
+        <meta name="keywords" content="housing agency house search"/>
+    </head>
+    <body>
+        <div class="wrapper">
+            <header>
+                <div class="topHeader">
+                    <div class="identity">
+                        <a  href="index.html">
+                            <img class="logo" src="./build/imgs/HomeSearch_logo_1-218x139.png" alt="logo">
+                        </a>
+                    </div><!--/identity-->
+                    <nav class="topNav">
+                        <ul>
+                            <li><a  href="index.html">Home</a></li> <!-- class="currentPageLink" -->
+                            <li><a href="signin.html">Sign In</a></li>                
+                        </ul>
+                    </nav><!--/topNav-->
+                    <div class="banner">     
+                        <div class="containerSearchPanel">  
+                            <h1 class="mainName">Search</h1>
+                            <div class="redDash"></div><!-- redDash -->
+                            <form method="post" action="#" class="fields">
+                                <div class="centerAlign">
+                                    <div class="alignView">
+                                        <label for="ddSaleRent" class="spSaleRent">Sale/Rent :</label>   
+                                        <select id="ddSaleRent" title="ddSaleRent" name="dropdown" class="ddSaleRent">
+                                            <option value="sale">For Sale</option>
+                                            <option value="rent">For Rent</option>
+                                        </select>             
+                                    </div>  <!-- saleRent -->
+                                    <div class="alignView">
+                                        <label for="citypostcode" class="spPostcode">Postcode :</label>                             
+                                        <input name="cityPostcode" title = "postcode" type="text" id="citypostcode" class="fields" placeholder="City/Postcode" required>
+                                    </div><!-- City/Postcode -->
+                                    <div class="alignView">                
+                                        <label for="min" class="spMin">Min :</label>
+                                        <input name="min" type="number" placeholder="0" required step="100" id="min">
+                                    </div><!-- Min -->
+                                    <div class="alignView">
+                                        <label for="max" class="spMax">Max :</label>
+                                        <input name="max" type="number" placeholder="450k" required step="100" id="max">
+                                    </div><!-- Max -->   
+                                    <div class="indexSubmit">
+                                        <button type="button" class="btnSubmit">Submit</button>
+                                    </div><!-- submit Button -->
+                                </div><!--/centerAlign-->
+                            </form>
+                        </div><!--/container-->
+                    </div><!--/banner-->
+                </div><!--/topHeader-->
+            </header>
+            <main>
+                <section class="mainBody">           
+                    <div class="contain">
+                        <section class="searchResults">
+                            <div class="headingCenter">
+                                <h1>Search Results</h1>
+                            </div><!--headingCenter-->
+                            <div class="resHouse flexCont"><!--result house-->
+                                <a class="hImage" href="houseDetails.html">
+                                    <img src="build/imgs/house-432x239.png" width="432"  height="239" title="Click for House Details"
+                                         alt="Click for House Details">
+                                </a><!--/hImage-->
+                                <div class="resStreetName">
+                                    <div>
+                                        <p class="hRentSale">House for Rent/Sale</p>
+                                    </div><!--/hRentSale-->
+                                    <div>
+                                        <p class="hPrice">Price: £ 400k</p>
+                                    </div><!--/hPrice-->
+                                    <div>                                   
+                                        <p class="hStreet">35 Osier Way, Cambridge, CB1 5FR</p> 
+                                    </div><!--/hStreet-->  
+                                    <div>                                   
+                                        <p class="hDetails">4 bedroom detached house for sale</p> 
+                                    </div><!--/hDetails-->
+                                    <div class="alignBtn">                            
+                                        <button type="button" class="btnSubmit">Add to Favourites</button>
+                                    </div><!--/alignBtn-->
+                                </div><!--/resStreetName-->
+                            </div>  <!--/resHouse-->             
+                        </section><!--/searchResults-->
+                    </div><!--/mainBody container-->
+                </section><!--/ mainBody-->
+            </main>
+            <footer>
+                <div class="bottomFooter">
+                    <div class="con">
+                        <p>HomeSearch &copy - PHP course project</p>
+                        <p>
+                            <a href="index.html">Home</a> 
+                            <a href="signin.html">Sign In</a>
+                        </p>
+                    </div><!--/ footer con-->
+                </div><!--/bottomFooter-->
+            </footer>
+        </div><!--/wrapper-->
+        
+        <script src="./build/js/index.js"></script>
+        <!--/ your JS here-->
+    </body>
+</html>

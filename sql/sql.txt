@@ -1,0 +1,149 @@
+'' => single quotes  => values
+"" => double quotes	 => queries
+`` => reverse commas => DB entities names
+
+
+
+***********
+CREATE A DB
+***********
+
+CREATE DATABASE `home_search`
+
+
+
+##############
+USERROLES
+##############
+CREATE TABLE IF NOT EXISTS `userroles` (
+  `urID` smallint(3) unsigned NOT NULL AUTO_INCREMENT,
+  `urRole` varchar(150) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`urID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+
+
+
+###############
+INSERT USERROLES
+###############
+
+INSERT INTO `home_search`.`userroles` (
+`urRole`
+)
+VALUES ('Admin'),
+       ('Property Dealer'),
+       ('Customer');
+       
+
+##############
+RENT/SALE
+##############
+CREATE TABLE IF NOT EXISTS `rentsale` (
+  `rsID` smallint(3) unsigned NOT NULL AUTO_INCREMENT,
+  `rsRentSale` varchar(150) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`rsID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+
+
+
+###############
+INSERT RENTSALE
+###############
+
+INSERT INTO `home_search`.`rentsale` (
+`rsRentSale`
+)
+VALUES ('Rent'),
+       ('Sale');
+       
+  
+
+##############
+USER
+##############
+CREATE TABLE `home_search`.`user` ( `uID` SMALLINT(3) UNSIGNED NOT NULL AUTO_INCREMENT ,
+ 									`rID` SMALLINT(3) UNSIGNED NOT NULL ,
+									`email` VARCHAR(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL ,
+  									`pwd` VARCHAR(10) NOT NULL ,
+   									`uName` VARCHAR(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL ,
+    								`hID` SMALLINT(3) UNSIGNED NULL ,
+     								`phone` BIGINT(10) UNSIGNED NULL DEFAULT NULL ,
+      								PRIMARY KEY (`uID`)) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_unicode_ci;
+
+###############
+INSERT USERS
+###############
+
+INSERT INTO `home_search`.`user` (
+`rID` ,
+`email` ,
+`pwd` ,
+`uName` ,
+`hID` ,
+`phone`
+)
+VALUES ('1', 'p@p.com', 'admin', 'admin', NULL, '0123'),
+       ('2', 'p@p.com', 'pd', 'property d', 1, '0123'),
+       ('3', 'p@p.com', 'cust', 'cust1', 1, '0123'),
+       ('2', 'p@p.com', 'pd', 'property d', 2, '0123'),
+       ('3', 'p@p.com', 'cust', 'cust2', 2, '0123'),
+       ('3', 'p@p.com', 'cust', 'cust3', 1, '0123'),
+       ('2', 'p@p.com', 'pd', 'property d', 3, '0123');
+
+
+
+##############
+HOUSE
+##############
+CREATE TABLE `home_search`.`house` ( `hID` SMALLINT(3) UNSIGNED NOT NULL AUTO_INCREMENT ,
+ 									`rsID` SMALLINT(3) UNSIGNED NOT NULL ,
+									`housenumber` INT(3) UNSIGNED NOT NULL,
+  									`streetname` VARCHAR(10) NOT NULL ,
+   									`city` VARCHAR(10) NOT NULL ,
+    								`postcode` VARCHAR(10) NOT NULL ,
+     								`details` TEXT NOT NULL ,
+     								`image` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+     								`floorplan` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+     								`uID` SMALLINT(3) UNSIGNED NOT NULL ,
+     								`price` INT(4) UNSIGNED NOT NULL ,
+      								PRIMARY KEY (`hID`)) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_unicode_ci;
+
+###############
+INSERT HOUSE
+###############
+
+INSERT INTO `home_search`.`house` (
+`rsID` ,
+`housenumber` ,
+`streetname` ,
+`city` ,
+`postcode` ,
+`details`,
+`image`,
+`floorplan`,
+`uID`,
+`price`
+)
+VALUES ('1', '45', 'Osier Way', 'London', 'CB15DE', 'Details to fill in', 'image URL', 'floor plan URL', '1', '455k' ),
+       ('2', '4', 'Gherkin Way', 'Birmingham', 'CB229DY', 'Details to fill in', 'image URL', 'floor plan URL', '7', '300k' ),
+       ('1', '5', 'Amiye Way', 'London', 'CB72GH', 'Details to fill in', 'image URL', 'floor plan URL', '4', '290k' ),
+       ('2', '33', 'Nostalgia Country', 'Birmingham', 'CB8FD6', 'Details to fill in', 'image URL', 'floor plan URL', '6', '415k' ),
+       ('1', '76', 'Harring Close', 'London', 'CB76FD', 'Details to fill in', 'image URL', 'floor plan URL', '5', '500k' ),
+       ('2', '94', 'Nearly Gate', 'Birmingham', 'CB13SD', 'Details to fill in', 'image URL', 'floor plan URL', '3', '700k' ),
+       ('1', '2', 'Skegness Country', 'London', 'CB58FG', 'Details to fill in', 'image URL', 'floor plan URL', '2', '200k' );
+
+###############
+ADD FOREIGN kEY
+###############
+ALTER TABLE `house` CHANGE `rsID` `rsID` SMALLINT(3) UNSIGNED NOT NULL;
+Make foreign key as an Index first
+ALTER TABLE `house` ADD INDEX(`rsID`);
+
+
+ALTER TABLE `home_search`.`house`
+ADD FOREIGN KEY (`rsID`) REFERENCES `home_search`.`rentsale`(`rsID`);
+ALTER TABLE `user` ADD INDEX(`rID`);
+ALTER TABLE `user` ADD INDEX(`hID`);
+ALTER TABLE `house` ADD INDEX(`uID`);

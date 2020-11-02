@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>PHP PROJECT| HOME</title>
+        <link rel="stylesheet" href="https://use.typekit.net/vnj5wbt.css"><!-- Special Font used in e.g. Search -->
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">        
+        <link rel="stylesheet" href="../build/css/main.css" media="screen"/>
+        <link rel="shortcut icon" type="image/x-icon" href=""/>
+        <meta name="author" content="Payal"/>
+        <meta name="description" content="php project"/>
+        <meta name="keywords" content="housing agency house search"/>
+    </head>
+    <body>
+        <div class="wrapper">
+            <header>
+                <div class="topHeader">
+                    <div class="identity">
+                        <a  href="../index.html">
+                            <img class="logo" src="../build/imgs/HomeSearch_logo_1-218x139.png" alt="logo">
+                        </a>
+                    </div><!--/identity-->
+                    <nav class="topNav">
+                        <ul>
+                            <li><a  href="../index.html">Home</a></li> <!-- class="currentPageLink" -->
+                            <li><a href="../signin.html">Sign In</a></li>                
+                        </ul>
+                    </nav><!--/topNav-->   
+                    <nav class="bottomNav">
+                        <ul class="navWidth">
+                            <li><a class="adminNav" href="viewHouses.html">View Houses</a></li> 
+                            <li><a class="adminNav" href="addHouse.html">Add/Edit House</a></li> 
+                            <li><a class="adminNav" href="viewUsers.html">View Users</a></li> 
+                            <li><a class="adminNav" href="addUser.html">Add/Edit User</a></li>                     
+                        </ul>
+                    </nav><!--/bottomNav-->
+                </div><!--/topHeader-->
+            </header>
+        </div><!--/wrapper-->
+        <main>
+            <section class="mainBody">
+                <div class="contain">
+                    <section class="editAddItem">               
+                        <h2 class="sectionTitle"></h2>
+                        <form method="post" action="#" class="fields">
+                            <div class="headingCenter">
+                                <h1>Add/Edit User</h1>
+                            </div><!--align heading-->
+                            <div class="form">
+                                <div class="editAddHouseAlign">                       
+                                    <div class="align">
+                                        <label for="uRole">Role:</label>
+                                        <input list="roles" name="role">
+                                        <datalist id="roles">
+                                        </datalist>
+                                    </div><!--align role-->
+                                    <div class="align">
+                                        <label for="uEmail">EMAIL :</label>
+                                        <input class="formField" type="text" id="uEmail" name="uEmail" value="">
+                                    </div><!--align email address-->  
+                                    <div class="align">
+                                        <label for="uPsw">PASSWORD :</label>
+                                        <input class="formField" type="text" id="uPsw" name="uPsw" value="">
+                                    </div><!--align password--> 
+                                    <div class="align">
+                                        <label for="uHouseAssigned">HOUSE ASSIGNED :</label>
+                                        <input list="houses" name="house">
+                                        <datalist id="houses">
+                                        </datalist>
+                                    </div><!--align password--> 
+                                    <div class="align">
+                                        <label for="uName">NAME :</label>
+                                        <input class="formField" type="text" id="uName" name="uName" value="">
+                                    </div><!--align name--> 
+                                    <div class="align">
+                                        <label for="uPhoneNumber">PHONE NUMBER :</label>
+                                        <input class="formField" type="text" id="uPhoneNumber" name="uPhoneNumber" value="">                                
+                                    </div><!--/align phone number-->                       
+                                    <div class="alignBtn">
+                                        <button type="submit" class="btnSubmit">Submit</button>                                
+                                    </div><!--/align submit--> 
+                                </div><!--/editAddHousealign-->
+                        </form><!--/editAddHouse-->
+                    </section><!--/editAddHouse-->
+                </div><!--/container-->   
+            </section><!--/ mainBody-->
+        </main>
+        <footer>
+            <div class="bottomFooter">
+                <div class="con">
+                    <p>HomeSearch &copy - PHP course project</p>
+                    <p>
+                        <a href="../index.html">Home</a> 
+                        <a href="../signin.html">Sign In</a>
+                    </p>
+                </div><!--/ footer con-->
+            </div><!--/bottomFooter-->
+        </footer>
+        <!--/ your JS here-->
+    </body>
+</html>
