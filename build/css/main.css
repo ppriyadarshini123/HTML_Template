@@ -191,20 +191,21 @@ a
     {
         background-image: url("../imgs/house-1366x460.png");
         background-repeat: no-repeat;
-/*        height: 460px;*/
+        height: 460px;
         color: #1CE823;
         border-top: 1px solid green;
         position: relative;
     }
 
     .containerSearchPanel
-    {
-        width: 400px;
+    {        
+        width: 29%;
+        height: 79%;
         background-color: #FFFFFF;
         text-align: center;
         border: 1vw #1CE823 solid;
         position: absolute;
-        top:11%;
+        top:10%;
         left: 12%;
     }
 
