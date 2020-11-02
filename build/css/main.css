@@ -58,11 +58,6 @@ a
 @media screen and (min-width: 769px) and (max-width: 1200px)
 {
 
-}/* >768px and < 1200px - Laptop*/
-
-/* >1200px - Desktop*/
-@media screen and (min-width: 1200px)
-{
 
     .underlined
     {
@@ -194,9 +189,9 @@ a
 
     .banner
     {
-        background-image: url("../imgs/house-1351x460.png");
+        background-image: url("../imgs/house-1366x460.png");
         background-repeat: no-repeat;
-        height: 460px;
+/*        height: 460px;*/
         color: #1CE823;
         border-top: 1px solid green;
         position: relative;
@@ -510,6 +505,559 @@ a
         letter-spacing: .1vw;
         padding-top: .2vw;
         padding-bottom: 1.5vw;    
+        justify-content: space-between;
+    }
+
+    .alignView span
+    {
+        width:7vw;
+        display: inline-table;
+    }
+    .spPostcode
+    {
+
+    }
+    .spMin
+    {
+
+    }
+    .spMax
+    {
+
+    }
+
+    /******************
+     *  ADD HOUSE PAGE
+     ******************/
+    .form
+    {
+
+        text-align: left;
+        width: 36vw;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 1vw;
+    }
+    .fileUpload
+    {
+        width: 43%;
+    }
+
+    /******************
+     *  ADD USER PAGE
+     ******************/
+    .editAddHouseAlign
+    {
+        text-align: left;
+        width: 32vw;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .headingCenter
+    {
+        text-align: center;
+        background-color: #1CE823;
+        color: #FEFF1F;
+        letter-spacing: .1vw;
+        padding-top: 1.5vw;
+        padding-bottom: 1.5vw;
+        margin-bottom: 1vw;
+    }
+
+    .alignBtn
+    {   
+        /*    margin-top: 1vw;
+            margin-left: 2vw;*/
+        text-align: center;
+    }
+
+    /******************
+     *  FOOTER  SECTION
+     ***********************************/
+    .bottomFooter
+    {
+        background-color: #358016;
+        padding:45px 86px;
+        color:#fff;
+        font-size:13px;
+        font-weight: 300;
+    }
+
+    .bottomFooter a{
+        color:#fff;
+        color:#fff;
+        font-size:13px;
+        font-weight: 300;
+        letter-spacing: .1vw;
+    }
+
+    .bottomFooter p:first-child{
+        margin-bottom:10px;
+        letter-spacing: .1vw;
+    }
+
+    .bottomFooter a:hover{
+        text-decoration: underline;
+
+    }
+
+
+}/* >768px and < 1200px - Laptop*/
+
+/* >1200px - Desktop*/
+@media screen and (min-width: 1200px)
+{
+
+    .underlined
+    {
+        border-bottom:1px solid #ff3f38;
+    }
+
+    /******************
+     *  HEADER  SECTION
+     ******************/
+    .topHeader
+    {    
+        width: 100%;   
+        position: relative;
+    }
+    header
+    {
+        border: .1vw #1CE823 solid;
+    }
+
+    .logo
+    {
+        padding-left: 30px;	
+    }
+
+    .cName
+    {
+        font-size: 16px;
+        display: inline-block;
+        padding-top: 33px;
+        margin-left: 10px;
+        height: 80px;
+        color:#1e3b4d;
+    }
+
+    .identity, .topNav
+    {    
+        display:inline-block;
+    }
+
+    .topNav 
+    {
+        position: absolute;
+        top:0;
+        right:0;
+        margin-right: 10vw;    
+    }
+
+    .topNav ul
+    {
+        display:-ms-flexbox;
+        display:flex;
+        height: 100%;
+    }
+
+    .topNav a
+    {
+        display: inline-block;
+        font-size:12px;
+        text-transform: uppercase;
+        border-bottom:4px solid #fff;
+        height: 100%;
+        padding-top:32px;
+        margin:0 15px ;
+        color:#1e3b4d;
+    }
+
+    .topNav a.currentPageLink
+    {
+        border-bottom:4px solid #ff3f38;
+        color:#ff3f38;
+    }
+
+    .topNav a.currentPageLink:hover
+    {
+        text-decoration: none;
+    }
+
+    .topNav a:hover
+    {
+        text-decoration: underline;
+    }
+
+    .topNav a.redLink
+    {
+        color: #ff3f38;
+    }
+
+    .topNav a span.greyLink
+    {
+        color:#bfbfbf;
+    }
+
+    /******************
+     *  ADMINNAV  SECTION
+     ******************/
+    .bottomNav
+    {        
+        display: inline-flex;   
+        position: absolute;
+        right: 0;
+        bottom:0;
+        padding-right: 10vw;    
+    }
+
+    .navWidth
+    {
+        display: flex;
+        justify-content: space-between;
+        width: 48vw;    
+    }
+    .navWidth li
+    {
+
+    }
+
+    .adminNav
+    {
+        color:#358016;
+    }
+    .adminNav:hover
+    {    
+        color:#358016;
+        text-decoration: underline;
+        box-sizing: border-box;
+    }
+    /******************
+     *  BANNER  SECTION
+     ******************/
+
+    .banner
+    {
+        background-image: url("../imgs/house-1366x460.png");
+        background-repeat: no-repeat;
+        height: 460px;
+        color: #1CE823;
+        border-top: 1px solid green;
+        position: relative;
+    }
+
+    .containerSearchPanel
+    {
+        width: 27%;
+        height: 92%;
+        background-color: #FFFFFF;
+        text-align: center;
+        border: 1vw #1CE823 solid;
+        position: absolute;
+        top:4%;
+        left: 12%;
+    }
+
+    .redDash
+    {
+        background-color: #ff3f38;
+        width: 25px;
+        height: 4px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 1vw;
+    }
+    .mainName
+    {
+        font-size: 42px;
+        width:100%;
+        padding-top: 1.2vw;
+        padding-bottom: 1.2vw;
+        font-weight: 400;
+        color:#358016;
+        font-family: parkside, cursive;
+        font-weight: 400;
+        font-style: normal;
+    }
+    .align
+    {
+        color: #358016;
+        letter-spacing: .1vw;
+        padding-top: .2vw;
+        padding-bottom: 1.5vw;
+        margin-bottom: .9vw;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .fields
+    {
+        text-align: center;  
+    }
+
+    .btnSubmit
+    {
+        background-color: #358016;
+        color: #FFFFFF;
+        padding: 1vw; 
+        letter-spacing: .2vw;
+        font-family: parkside, cursive;
+        font-weight: 100;
+        font-style: normal;
+        font-size: 20px;
+        border: 1px transparent solid;        
+    }
+    .btnSubmit:hover
+    {
+        border: 1px #1CE823 solid;
+        color: #FEFF1F;
+    }
+    /**********************************
+     *  MAIN (index.php) SECTION
+     ***********************************/
+    main
+    {
+        background-color: #eee;
+    }
+
+    .mainBody
+    {
+
+    }
+    .contain
+    {
+        padding-top: 1vw;
+        background-color: #FFFFFF;
+        text-align: center; 
+        width:100%;    
+    }
+
+    .resHouse
+    {
+        display: flex;  
+        margin-left: 86px;
+    }
+
+    .indexSubmit
+    {
+        margin-bottom: 1vw;
+        margin-top: 2vw;
+        text-align: center;
+    }
+
+    .hImage
+    {
+        width: 50%;
+    }
+
+    .resStreetName
+    {
+        margin-bottom: 1vw;
+        margin-top: 3vw;
+        width:50%;
+    }
+    .hStreet, .hDetails, .hPD
+    {
+        padding-top: .1vw;
+        padding-bottom: 1.2vw;    
+    }
+    .resCity
+    {
+
+    }
+    .hCity
+    {
+
+    }
+    .resPrice
+    {
+
+    }
+
+    .hPrice
+    {
+        padding-top: 1.2vw;
+        padding-bottom: 1.2vw;
+        font-weight: bold;
+    }
+
+    .hFav
+    {
+
+    }
+
+    /******************
+     *  HOUSEDETAILS PAGE
+     ******************/
+    .housedetails
+    {
+
+    }
+
+    .resStreetNameDetails
+    {
+        margin-bottom: 1vw;
+        margin-top: 3vw;
+    }
+
+    .alignBtnFav
+    {
+        margin-left: 1vw;
+        margin-right: 1vw;
+    }
+
+    .flexAlign
+    {
+        display: flex;    
+    }
+    .flexAlignInline
+    {
+        display: inline-flex;
+    }
+
+    .dispGrid
+    {
+        display: inline-grid;
+        width: 20%;
+    }
+
+    .divDetails
+    {
+        border-right: #FFFFFF 2px solid;
+        padding: 1vw;
+        width: 50%;
+    }
+    .divFloorPlan
+    {
+        padding: 1vw;
+        width: 50%;
+    }
+    .divDetails:hover,.divDetails:active, .divFloorPlan:hover, .divFloorPlan:active
+    {
+        cursor: pointer;
+        background-color: #358016;
+        color: white;
+    }
+    .clickedDivFloorPlan
+    {
+        display: none;  
+        margin-bottom: 1vw;    
+    }
+
+    .headingHouseDetails
+    {
+        text-align: center;
+        background-color: #1CE823;
+        color: #FEFF1F;
+        letter-spacing: .1vw;
+        margin-bottom: .9vw;
+    }
+
+    .w-100
+    {
+        width: 50%!important;
+    }
+    .d-block
+    {
+        display: inline!important;
+    }
+
+    .clicked
+    {
+        background-color: #358016;
+        color: #FFFFFF;
+    }
+    .notClicked
+    {
+        background-color: #1CE823;
+        color: #FEFF1F;
+    }
+
+    /******************
+     *  SIGNIN PAGE
+     ******************/
+    .signinpage
+    {
+
+    }
+    .signin
+    {
+
+        padding-bottom: 1vw;
+    }
+    .flexCont
+    {
+        margin-bottom: 1vw;
+        margin-top: 1vw;
+    }
+    .password
+    {
+
+    }
+    .spEmail
+    {
+
+    }
+
+    /******************
+     *  VIEW USERS/HOUSES PAGE
+     ******************/
+
+    .searchResults
+    {
+
+    }
+
+    .resUserDetails
+    {
+        display: flex;
+        justify-content: space-around;
+        padding-top: 1vw;
+        padding-bottom: 1vw;
+    }
+
+    .resUser
+    {
+        display: flex;
+        justify-content: space-around;
+        background-color: #358016;
+        color: white;
+        padding: 1.5vw;
+    }
+
+    .uRole
+    {
+
+    }
+
+    .uName
+    {
+
+    }
+    .uEmail
+    {
+
+    }
+    .uPhone
+    {
+
+    }
+    .centerAlign
+    {
+        text-align: left;
+        width: 85%;  
+        margin-left: auto;
+        margin-right: auto;
+        padding-bottom: 2vw;
+    }
+
+    .alignView
+    {
+        color: #358016;
+        letter-spacing: .1vw;
+        padding-top: .2vw;
+        padding-bottom: 2vw;    
         justify-content: space-between;
     }
 

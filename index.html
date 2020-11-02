@@ -20,7 +20,11 @@
                 <div class="topHeader">
                     <div class="identity">
                         <a  href="#">
-                            <img class="logo" src="build/imgs/HomeSearch_logo_1-218x139.png" alt="logo">
+                            <picture>
+                                <source media="(max-width: 768px)" srcset="build/imgs/HomeSearch_logo_1-218x139.png">
+                                <source media="(min-width: 1200px)" srcset="build/imgs/HomeSearch_logo_1-218x139.png">
+                                <img class="logo" src="build/imgs/HomeSearch_logo_1-218x139.png" alt="logo">
+                            </picture>
                         </a>
                     </div><!--/identity-->
                     <nav class="topNav">
@@ -72,8 +76,13 @@
                             </div><!--headingCenter-->
                             <div class="resHouse flexCont"><!--result house-->
                                 <a class="hImage" href="houseDetails.html">
-                                    <img src="build/imgs/house-432x239.png" width="432"  height="239" title="Click for House Details"
-                                         alt="Click for House Details">
+                                    <picture>
+                                        <source media="(max-width: 768px)" srcset="build/imgs/house-432x239.png">
+                                        <source media="(min-width: 1200px)" srcset="build/imgs/house-432x239.png">
+                                        <img src="build/imgs/house-432x239.png" width="432"  height="239" title="Click for House Details"
+                                             alt="Click for House Details">
+                                    </picture>
+
                                 </a><!--/hImage-->
                                 <div class="resStreetName">
                                     <div>
@@ -109,8 +118,8 @@
                 </div><!--/bottomFooter-->
             </footer>
         </div><!--/wrapper-->
-        
-       
+
+
         <!--/ your JS here-->
     </body>
 </html>

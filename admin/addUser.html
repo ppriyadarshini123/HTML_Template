@@ -20,7 +20,12 @@
                 <div class="topHeader">
                     <div class="identity">
                         <a  href="../index.html">
-                            <img class="logo" src="../build/imgs/HomeSearch_logo_1-218x139.png" alt="logo">
+                            <picture>
+                                <source media="(max-width: 768px)" srcset="../build/imgs/HomeSearch_logo_1-218x139.png">
+                                <source media="(min-width: 1200px)" srcset="../build/imgs/HomeSearch_logo_1-218x139.png">
+                                <img class="logo" src="../build/imgs/HomeSearch_logo_1-218x139.png" alt="logo">
+                            </picture> 
+
                         </a>
                     </div><!--/identity-->
                     <nav class="topNav">
