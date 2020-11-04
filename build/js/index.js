@@ -1,3 +1,8 @@
+//import $ from 'jquery';
+//window.jQuery = $;
+//window.$ = $;
+//import enquire from 'enquire.js';
+
 /*
  * @file index.js
  * @folder build/js
@@ -21,9 +26,30 @@
     const $clickedDivFloorPlan = $('#clickedDivFloorPlan');
     const $clickedDivDetails = $('#clickedDivDetails');
     const $divDetails = $('#divDetails');
+    const $menuIcon = $('#openNav');
     
     
     /* FUNCTIONS*/
+    
+     /**
+     * @name mobile
+     * @desc code for the changing picture when the tabs are clicked, for the mobile viewport
+     */
+    function mobile()
+    {
+        enquire.register("screen and (max-width:360px)", {
+            match: function(){
+                /*Toggle navigation*/
+                $menuIcon.on('click', function () {
+                    $('.topNav').slideToggle("fast", "linear");
+                    console.log("inside jquery");
+                });/*menuIcon.click*/                
+            },/*match*/
+            unmatch: function(){
+
+            }/*unmatch*/
+        });/*enquire.register*/
+    }//mobile
 
     /**
      * @name divFloorPlanClicked
@@ -72,6 +98,7 @@
         $divDetails.removeClass("notClicked");
         divDetailsClicked();
         divFloorPlanClicked();
+        mobile();
     }//bindBtns
 
 
