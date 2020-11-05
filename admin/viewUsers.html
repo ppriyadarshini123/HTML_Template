@@ -18,9 +18,11 @@
         <div class="wrapper">
             <header>
                 <div class="topHeader">
+                     <div>
+                        <span class="hamburger" id="openNav">&#9776;</span>
+                    </div><!--Hamburger Icon-->
                     <div class="identity">
-                        <a  href="../index.html">
-                           
+                        <a  href="../index.html">                           
                              <picture>
                                 <source media="(max-width: 768px)" srcset="../build/imgs/HomeSearch_logo_1-218x139.png">
                                 <source media="(min-width: 1200px)" srcset="../build/imgs/HomeSearch_logo_1-218x139.png">
@@ -30,10 +32,10 @@
                     </div><!--/identity-->
                     <nav class="topNav">
                         <ul>
-                            <li><a  href="../index.html">Home</a></li> <!-- class="currentPageLink" -->
-                            <li><a href="../signin.html">Sign In</a></li>                
+                            <li class="homeBorder"><a  href="../index.html">Home</a></li> <!-- class="currentPageLink" -->
+                            <li><a href="signin.html">Sign In</a></li>                
                         </ul>
-                    </nav><!--/topNav-->   
+                    </nav><!--/topNav--> 
                     <nav class="bottomNav">
                         <ul class="navWidth">
                             <li><a class="adminNav" href="viewHouses.html">View Houses</a></li> 
@@ -92,11 +94,15 @@
                     <p>HomeSearch &copy - PHP course project</p>
                     <p>
                         <a href="../index.html">Home</a> 
-                        <a href="../signin.html">Sign In</a>
+                        <a href="signin.html">Sign In</a>
                     </p>
                 </div><!--/ footer con-->
             </div><!--/bottomFooter-->
         </footer>
+        
+          <script src="../node_modules/jquery/dist/jquery.js"></script>
+        <script src="../node_modules/enquire.js/dist/enquire.min.js"></script>
+        <script src="../build/js/index.js"></script>
         <!--/ your JS here-->
     </body>
 </html>

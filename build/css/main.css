@@ -246,7 +246,7 @@ a
         margin-bottom: .9vw;
         display: flex;
         justify-content: space-between;
-        font-size: 1.7vw;
+        font-size: 5vw;
         line-height: 2vw;
         min-width: max-content;
     }
@@ -495,12 +495,14 @@ a
     .resUserDetails
     {
         display: flex;
-        justify-content: space-around;
+        justify-content: space-evenly;
         padding-top: 1vw;
         padding-bottom: 1vw;
+        font-size: 3vw;
+        line-height: 6vw;
     }
 
-    .resUser
+    .resHouseTitle
     {
 /*        display: flex;
         justify-content: space-around;
@@ -508,6 +510,16 @@ a
         color: white;
         padding: 1.5vw;*/
         display: none;
+    }
+    
+    .resUser
+    {
+        display: flex;
+        justify-content: space-around;
+        background-color: #358016;
+        color: white;
+        padding: 1.5vw;
+        
     }
 
     .uRole
@@ -571,14 +583,16 @@ a
     {
 
         text-align: left;
-        width: 38vw;
+        width: 94vw;
         margin-left: auto;
         margin-right: auto;
-        margin-bottom: 1vw;
+        margin-bottom: 3vw;
+        margin-top: 3vw;
     }
     .fileUpload
     {
-        width: 61%;
+        width: 53%;
+        line-height: 7vw;
     }
 
     /******************
