@@ -64,7 +64,7 @@ a
     }
     header
     {
-        border: .1vw #1CE823 solid;
+       
     }
 
     .homeBorder
@@ -164,18 +164,16 @@ a
      ******************/
     .bottomNav
     {        
-        display: inline-flex;   
-        position: absolute;
-        right: 0;
-        bottom:0;
-          
+        display: flex;   
+        justify-content: space-around;
+        line-height: 6vw;
     }
 
     .navWidth
     {
         display: flex;
         justify-content: space-evenly;
-        width: 67vw;    
+        width: 94vw;    
     }
     .navWidth li
     {
@@ -374,8 +372,7 @@ a
 
     .alignBtnFav
     {
-        margin-left: 1vw;
-        margin-right: 1vw;
+        margin-top: 2vw;
     }
 
     .flexAlign
@@ -384,7 +381,8 @@ a
     }
     .flexAlignInline
     {
-        display: inline-flex;
+        width: 100%;
+        max-width: 100%;
     }
 
     .dispGrid
@@ -396,12 +394,12 @@ a
     .divDetails
     {
         border-right: #FFFFFF 2px solid;
-        padding: 1vw;
+        padding: 2.5vw;
         width: 50%;
     }
     .divFloorPlan
     {
-        padding: 1vw;
+        padding: 2.5vw;
         width: 50%;
     }
     .divDetails:hover,.divDetails:active, .divFloorPlan:hover, .divFloorPlan:active
@@ -427,7 +425,7 @@ a
 
     .w-100
     {
-        width: 50%!important;
+        width: 90%!important;
     }
     .d-block
     {
@@ -460,7 +458,7 @@ a
     .alignSignIn
     {
         text-align: left;
-        width: 43%;  
+        width: 81%;  
         margin-left: auto;
         margin-right: auto;
     }
@@ -504,11 +502,12 @@ a
 
     .resUser
     {
-        display: flex;
+/*        display: flex;
         justify-content: space-around;
         background-color: #358016;
         color: white;
-        padding: 1.5vw;
+        padding: 1.5vw;*/
+        display: none;
     }
 
     .uRole
@@ -617,10 +616,10 @@ a
     .bottomFooter
     {
         background-color: #358016;
-        padding:45px 86px;
+        padding:34px 16px;
         color:#fff;
         font-size:13px;
-        font-weight: 300;
+        
     }
 
     .bottomFooter a{

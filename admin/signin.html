@@ -18,6 +18,9 @@
         <div class="wrapper">
             <header>
                 <div class="topHeader">
+                     <div>
+                        <span class="hamburger" id="openNav">&#9776;</span>
+                    </div><!--Hamburger Icon-->
                     <div class="identity">
                         <a  href="../index.html">
                             <img class="logo" src="../build/imgs/HomeSearch_logo_1-218x139.png" alt="logo">
@@ -25,10 +28,10 @@
                     </div><!--/identity-->
                     <nav class="topNav">
                         <ul>
-                            <li><a  href="../index.html">Home</a></li> <!-- class="currentPageLink" -->
-                            <li><a href="#">Sign In</a></li>                
+                            <li class="homeBorder"><a  href="#">Home</a></li> <!-- class="currentPageLink" -->
+                            <li><a href="admin/signin.html">Sign In</a></li>                
                         </ul>
-                    </nav><!--/topNav-->                    
+                    </nav><!--/topNav-->                   
                 </div><!--/topHeader-->
             </header>
             <main>
@@ -68,6 +71,9 @@
                 </div><!--/ footer con-->
             </div><!--/bottomFooter-->
         </footer>   
+         <script src="../node_modules/jquery/dist/jquery.js"></script>
+        <script src="../node_modules/enquire.js/dist/enquire.min.js"></script>
+        <script src="../build/js/index.js"></script>
         <!--/ your JS here-->
     </body>
 </html>
