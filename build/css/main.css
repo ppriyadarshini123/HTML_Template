@@ -48,6 +48,11 @@ a
     {
         border-bottom:1px solid #ff3f38;
     }
+    
+    .wrapper
+    {
+        width: 100%;
+    }
 
     /******************
      *  HEADER  SECTION
@@ -62,6 +67,12 @@ a
         border: .1vw #1CE823 solid;
     }
 
+    .homeBorder
+    {
+        border-right: 1px white solid;
+        padding-right: 10vw;
+    }
+    
     .topNav
     {
         display: none;
@@ -102,21 +113,24 @@ a
 
     .topNav ul
     {
-        display:-ms-flexbox;
         display:flex;
-        height: 100%;
+        height: 10vw;
+        width: 82vw;
+        max-width: 100%;
+        background-color: #358016;
+        justify-content: space-evenly;
     }
 
     .topNav a
     {
         display: inline-block;
         font-size:12px;
-        text-transform: uppercase;
-        border-bottom:4px solid #fff;
+        text-transform: uppercase;       
         height: 100%;
         padding-top:3vw;
-        margin:0 15px ;
-        color:#1e3b4d;
+        margin:0 15px;
+        color:#FFFFFF;
+        letter-spacing: .2vw;
     }
 
     .topNav a.currentPageLink
@@ -184,24 +198,24 @@ a
 
     .banner
     {
-        background-image: url("../imgs/house-767x460.png");
+        background-image: url("../imgs/house-359x360.png");
         background-repeat: no-repeat;
-        height: 460px;
-        color: #1CE823;
-        border-top: 1px solid green;
+        text-align: -webkit-center;        
+        border-top: 1px solid green; 
         position: relative;
+        height: 361px;
     }
 
     .containerSearchPanel
     {        
-        width: 43%;
-        height: 62%;
+        width: 89%;
+        height: 75%;
         background-color: #FFFFFF;
         text-align: center;
         border: 1vw #1CE823 solid;
         position: absolute;
-        top:19%;
-        left: 12%;
+        top: 13%;
+        left: 6%;        
     }
 
     .redDash
@@ -248,12 +262,12 @@ a
     {
         background-color: #358016;
         color: #FFFFFF;
-        padding: 1vw; 
+        padding: 5vw; 
         letter-spacing: .2vw;
         font-family: parkside, cursive;
         font-weight: 100;
         font-style: normal;
-        font-size: 20px;
+        font-size: 5vw;
         border: 1px transparent solid;        
     }
     .btnSubmit:hover
@@ -283,14 +297,14 @@ a
 
     .resHouse
     {
-        display: flex;  
-        margin-left: 1vw;
+        
     }
 
     .indexSubmit
     {
         margin-bottom: 1vw;
         text-align: center;
+        margin-top: 5vw;
     }
 
     .hImage
@@ -300,9 +314,9 @@ a
 
     .resStreetName
     {
-        margin-bottom: 1vw;
+        margin-bottom: 3vw;
         margin-top: 3vw;
-        width:44%;
+        width:100%;
     }
     .hStreet, .hDetails, .hPD
     {
@@ -332,6 +346,16 @@ a
     .hFav
     {
 
+    }
+    
+    .mobile
+    {
+        max-width: fit-content;
+    }
+    
+    .con
+    {
+        width: 100%;
     }
 
     /******************
@@ -520,6 +544,7 @@ a
         padding-bottom: 1.5vw;    
         justify-content: space-between;
         display: flex;
+        font-size: 5vw;
     }
 
     .alignView span
@@ -574,8 +599,8 @@ a
         background-color: #1CE823;
         color: #FEFF1F;
         letter-spacing: .1vw;
-        padding-top: 1.5vw;
-        padding-bottom: 1.5vw;
+        padding-top: 2.5vw;
+        padding-bottom: 2.5vw;
         margin-bottom: 1vw;
     }
 

@@ -32,7 +32,7 @@
                     </div><!--/identity-->
                     <nav class="topNav">
                         <ul>
-                            <li><a  href="#">Home</a></li> <!-- class="currentPageLink" -->
+                            <li class="homeBorder"><a  href="#">Home</a></li> <!-- class="currentPageLink" -->
                             <li><a href="admin/signin.html">Sign In</a></li>                
                         </ul>
                     </nav><!--/topNav-->
@@ -80,9 +80,10 @@
                             <div class="resHouse flexCont"><!--result house-->
                                 <a class="hImage" href="houseDetails.html">
                                     <picture>
+                                         <source media="(max-width: 359px)" srcset="build/imgs/house-359x300.png">
                                         <source media="(max-width: 768px)" srcset="build/imgs/house-432x239.png">
                                         <source media="(min-width: 1200px)" srcset="build/imgs/house-432x239.png">
-                                        <img src="build/imgs/house-432x239.png" width="432"  height="239" title="Click for House Details"
+                                        <img src="house-359x300.png" class="mobile" width="432"  height="239" title="Click for House Details"
                                              alt="Click for House Details">
                                     </picture>
 
