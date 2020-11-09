@@ -1074,8 +1074,8 @@ a
     {
 
     }
-    
-     .resHouseTitle
+
+    .resHouseTitle
     {
         display: flex;
         justify-content: space-around;
@@ -1242,8 +1242,6 @@ a
 /* >768px and < 1200px - Laptop*/
 @media screen and (min-width: 769px) and (max-width: 1200px)
 {
-
-
     .underlined
     {
         border-bottom:1px solid #ff3f38;
@@ -1785,6 +1783,44 @@ a
             margin-left: 2vw;*/
         text-align: center;
     }
+
+
+
+    /******************
+     *  FEEDBACK  SECTION
+     ***********************************/
+    .feedback{
+        color:#fff;
+        padding:20px 0;
+    }
+    .successMsg, .failMsg{
+        padding:15px 20px;
+        font-size:14px;
+        font-weight: 300;
+        margin:20px 0;
+        letter-spacing: .8px;
+    }
+
+    .successMsg{
+        background-color: darkgreen;
+        border:5px solid darkgreen;
+        background-image: url("../../build/imgs/yep.png");
+        background-position: right;
+        background-repeat: no-repeat;
+        background-size: contain;
+        padding-left: 20px;
+    }
+
+    .failMsg{
+        background-color: red;
+        border:5px solid red;
+        background-image: url("../../build/imgs/nope.png");
+        background-position: right;
+        background-repeat: no-repeat;
+        background-size: contain;
+        padding-left: 20px;
+    }
+
 
     /******************
      *  FOOTER  SECTION

@@ -1,11 +1,58 @@
 <?php
 /**
-*
-* PHP course project
-* url: /index.php
-*/
+ *
+ * PHP course project
+ * url: /index.php
+ */
 include("includes/utilities.php");
 
+
+if ($dbok)
+{
+    // DO NOT FORGET VALIDATION AND SANITATION!!!!    
+    $keySaleRent = isset($_GET['dropdown']) ? $_POST['dropdown'] : '';
+    $keyCityPostCode = isset($_GET['cityPostcode']) ? $_POST['cityPostcode'] : '';
+    $keyMin = isset($_GET['min']) ? $_POST['min'] : '';
+    $keyMax = isset($_GET['max']) ? $_POST['max'] : '';    
+    
+    /*
+      mysql wildcards:
+     * => any value
+      % => any substring
+      _ => any character
+     */
+
+
+    $q = "        
+                SELECT H.`price`, H.`image`, H.`details`, H.`postcode`, H.`city`, H.`streetname`, H.`housenumber`, H.`rsID`, H.`hID`, RS.`rsID`, RS.`rsRentSale`
+                FROM `house` H LEFT JOIN `rentsale` RS ON RS.`rsID` = H.`rsID`
+                WHERE
+                     RS.`rsRentSale` LIKE '%$keySaleRent%'
+                   OR        
+                     H.`city` LIKE '%$keyCityPostCode%'  
+                     OR        
+                     H.`postcode` LIKE '%$keyCityPostCode%'
+                     OR        
+                     H.`price` BETWEEN '%$keyMin%' AND '%$keyMax%'
+        ";
+
+    $res = $mysqli->query($q);
+    trace($res);
+    
+    if ($res->num_rows > 0) {
+        $houses = [];
+
+        while ($row = $res->fetch_assoc()) {
+            array_push($houses, $row);
+        } // while
+         trace($houses);
+    } else {
+        displayMsg('Could not find house or something went wrong.', 'f');
+    } # select check
+} ### search logic
+# 
+# 
+# 
 //   THIS IS THE BEGINNING OF THE MARKUP
 include("includes/top.php");
 include("includes/header.php");
@@ -17,6 +64,10 @@ include("includes/banner.php");
     <section class="mainBody">           
         <div class="contain">
             <section class="searchResults">
+                 <!-- ====================  FEEDBACK START =========-->
+                <?php include("includes/feedback.php"); ?>
+                <!-- ====================  FEEDBACK END ===========-->
+                
                 <div class="headingCenter">
                     <h1>Search Results</h1>
                 </div><!--headingCenter-->
