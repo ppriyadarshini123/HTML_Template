@@ -1,0 +1,69 @@
+<?php
+/**
+ *
+ * PHP course project
+ * url: /signin.php
+ */
+include("../includes/utilities.php");
+
+//   THIS IS THE BEGINNING OF THE MARKUP
+include("../includes/top.php");
+include("../includes/header.php");
+include("../includes/bottomNav.php");
+?>
+                </div><!--/topHeader-->
+            </header>
+        </div><!--/wrapper-->
+        <main>
+            <section class="mainBody">           
+                <div class="contain">
+                    <section class="searchResults">
+                        <div class="headingCenter">
+                            <h1>View Houses</h1>
+                        </div><!--align heading-->
+                        <div class="resHouseTitle">
+                            <div>
+                                <p class="uRole">House</p>
+                            </div><!--user role-->                               
+                            <div class="alignCenter">                                   
+                                <p >House Details</p> 
+                            </div><!--/Phone number--> 
+                        </div>  <!--/resUser-->
+                        <div class="resHouse flexCont"><!--result house-->
+                            <picture>
+                                <source media="(max-width: 359px)" srcset="../build/imgs/house-359x300.png">
+                                <source media="(max-width: 768px)" srcset="../build/imgs/house-432x239.png">
+                                <source media="(min-width: 1200px)" srcset="../build/imgs/house-432x239.png">
+                                <img src="../build/imgs/house-359x300.png" class="mobile" width="432"  height="239" title="Click for House Details"
+                                     alt="Click for House Details">
+                            </picture>
+                            <div class="resStreetName">
+                                <div>
+                                    <p class="hRentSale">House for Rent/Sale</p>
+                                </div><!--house for rent/sale-->
+                                <div>
+                                    <p class="hPrice">Price: £ 400k</p>
+                                </div><!--price-->
+                                <div>                                   
+                                    <p class="hStreet">35 Osier Way, Cambridge, CB1 5FR</p> 
+                                </div><!--/Street Name-->  
+                                <div>                                   
+                                    <p class="hDetails">4 bedroom detached house for sale</p> 
+                                </div><!--/Details-->
+                                <div class="alignBtn">                            
+                                    <button type="button" class="btnSubmit">Add to Favourites</button>
+                                </div><!--/alignBtn-->
+                            </div><!--/resStreetName-->
+                        </div>  <!--/resHouse-->             
+                    </section><!--/searchResults-->
+                </div><!--/mainBody contain-->
+            </section><!--/ mainBody-->
+        </main>
+       <?php include("../includes/footer.php"); ?> 
+
+<script src="<?php echo ROOT; ?>node_modules/jquery/dist/jquery.js"></script>
+<script src="<?php echo ROOT; ?>node_modules/enquire.js/dist/enquire.min.js"></script>
+<script src="<?php echo ROOT; ?>build/js/index.js"></script>
+<!--/ your JS here-->
+</body>
+</html>

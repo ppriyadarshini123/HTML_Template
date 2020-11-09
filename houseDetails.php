@@ -1,3 +1,11 @@
+  <?php
+    /**
+     *
+     * PHP course project
+     * url: /index.php
+     */
+    include("includes/utilities.php");
+    ?>
 <!doctype html>
 <html lang="en">
     <head>
@@ -10,31 +18,24 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
         <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css"> <!-- Required for Bootstrap -->
         <link rel="stylesheet" href="build/css/main.css" media="screen"/>
-        <link rel="shortcut icon" type="image/x-icon" href="build/imgs/HomeSearch_logo_1-218x139.png"/>
+        <link rel="shortcut icon" type="image/x-icon" href=""/>
         <meta name="author" content="Payal"/>
         <meta name="description" content="php project"/>
         <meta name="keywords" content="housing agency house search"/>
-    </head>
+    </head>  
     <body>
         <div class="wrapper">
             <header>
                 <div class="topHeader">
-                    <div>
-                        <span class="hamburger" id="openNav">&#9776;</span>
-                    </div><!--Hamburger Icon-->
                     <div class="identity">
-                        <a  href="index.html">                            
-                            <picture>
-                                <source media="(max-width: 768px)" srcset="build/imgs/HomeSearch_logo_1-218x139.png">
-                                <source media="(min-width: 1200px)" srcset="build/imgs/HomeSearch_logo_1-218x139.png">
-                                <img class="logo" src="build/imgs/HomeSearch_logo_1-218x139.png" alt="logo">
-                            </picture>
+                        <a  href="<?php echo ROOT; ?>index.php">
+                            <img class="logo" src="<?php echo ROOT; ?>build/imgs/HomeSearch_logo_1-218x139.png" alt="logo">
                         </a>
                     </div><!--/identity-->
                     <nav class="topNav">
                         <ul>
-                            <li class="homeBorder"><a  href="#">Home</a></li> <!-- class="currentPageLink" -->
-                            <li><a href="admin/signin.html">Sign In</a></li>                
+                            <li><a  href="<?php echo ROOT; ?>index.php">Home</a></li> <!-- class="currentPageLink" -->
+                            <li><a href="<?php echo ROOT; ?>admin/signin.php">Sign In</a></li>                
                         </ul>
                     </nav><!--/topNav-->
                 </div><!--/topHeader-->
@@ -126,23 +127,13 @@
                     </div><!--/wrapper mainBody container-->
                 </section><!--/mainBody-->
             </main>
-            <footer>
-                        <div class="bottomFooter">
-                            <div class="con">
-                                <p>HomeSearch &amp;copy - PHP course project</p>
-                                <p>
-                                    <a href="index.html">Home</a> 
-                                    <a href="admin/signin.html">Sign In</a>
-                                </p>
-                            </div><!--/ footer con-->
-                        </div><!--/bottomFooter-->
-                    </footer>
+            <?php include("includes/footer.php"); ?> 
         </div><!--/wrapper-->
-                    <!-- add your JS here-->
-                    <script src="node_modules/jquery/dist/jquery.js"></script>
-                    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-                    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-                    <script src="node_modules/enquire.js/dist/enquire.min.js"></script>
-                    <script src="build/js/index.js"></script>
-                    </body>
-                    </html>
+        <!-- add your JS here-->
+        <script src="node_modules/jquery/dist/jquery.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="node_modules/enquire.js/dist/enquire.min.js"></script>
+        <script src="build/js/index.js"></script>
+    </body>
+</html>
