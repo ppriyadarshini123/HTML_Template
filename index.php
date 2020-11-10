@@ -49,6 +49,7 @@ if ($dbok) {
 
         while ($row = $res->fetch_assoc()) {
             array_push($houses, $row);
+            
         } // while
         trace($houses);
     } else {
@@ -57,6 +58,7 @@ if ($dbok) {
 } ### search logic
 # 
 # 
+
 # 
 //   THIS IS THE BEGINNING OF THE MARKUP
 include("includes/top.php");
@@ -70,40 +72,40 @@ include("includes/banner.php");
         <div class="contain">
             <section class="searchResults">
                 <!-- ====================  FEEDBACK START =========-->
-                <?php include("includes/feedback.php"); ?>
+<?php include("includes/feedback.php"); ?>
                 <!-- ====================  FEEDBACK END ===========-->
 
                 <div class="headingCenter">
-                    <?php if (isset($keySaleRent)) { ?>
-                        <?php
-                        if ($keySaleRent == 1) {
-                            $v = "Rent";
-                        } else {
-                            $v = "Sale";
-                        }
-                        ?>
+<?php if (isset($keySaleRent)) { ?>
+    <?php
+    if ($keySaleRent == 1) {
+        $v = "Rent";
+    } else {
+        $v = "Sale";
+    }
+    ?>
                         <h1>Search Results for "<span class="qName"><?php
-                                echo "{$v},{$keyCityPostCode},{$keyMin},{$keyMax}";
-                                ;
-                                ?></span>"</h1>
-                <?php } // if key ?>
+                        echo "{$v},{$keyCityPostCode},{$keyMin},{$keyMax}";
+                        ;
+                        ?></span>"</h1>
+                    <?php } // if key ?>
                 </div><!--headingCenter-->
 
-                <?php
-                if (isset($houses) && isset($dbok) && $dbok) {
-                    foreach ($houses as $house) {
-                        ?>
+                            <?php
+                            if (isset($houses) && isset($dbok) && $dbok) {
+                                foreach ($houses as $house) {
+                                    ?>
 
                         <div class="resHouse flexCont"><!--result house-->
-                            <a class="hImage" href="<?php echo ROOT; ?>houseDetails.php">
+                            <a class="hImage" href="<?php echo ROOT; ?>houseDetails.php?h_id=<?php echo $house['hID']; ?>">
                                 <picture>
         <!--                                    <source media="(max-width: 359px)" srcset="<?php echo ROOT; ?>build/imgs/<?php
-                                    if (isset($house['image'])) {
-                                        echo $house['image'];
-                                    } else {
-                                        echo "no-image-359x198.png";
-                                    }
-                                    ?>">
+                        if (isset($house['image'])) {
+                            echo $house['image'];
+                        } else {
+                            echo "no-image-359x198.png";
+                        }
+                        ?>">
                                     <source media="(max-width: 768px)" srcset="<?php echo ROOT; ?>build/imgs/<?php echo ROOT; ?>build/imgs/<?php
                                     if (isset($house['image'])) {
                                         echo $house['image'];
@@ -118,9 +120,13 @@ include("includes/banner.php");
                                         echo "no-image-432x239.png";
                                     }
                                     ?>">-->
+                                    
+                                    
                                     <img src="<?php echo ROOT; ?>build/imgs/<?php
                                     if (isset($house['image'])) {
-                                        echo $house['image'];
+                                        global $house;
+                                        echo(explode(";",$house['image'])[0]);//explode is a string function to break the string from ; into arrays                                        
+                                        
                                     } else {
                                         echo "no-image-359x198.png";
                                     }
@@ -131,15 +137,15 @@ include("includes/banner.php");
                             <div class="resStreetName">
                                 <div>
                                     <p class="hRentSale">House for <?php
-                                    echo $v;
-                                    ?></p>
+                                         echo $v;
+                                         ?></p>
                                 </div><!--/hRentSale-->
                                 <div>
                                     <p class="hPrice">Price: £ <?php
-                                        if (isset($house['price'])) {
-                                            echo $house['price'];
-                                        }
-                                        ?></p>
+                                         if (isset($house['price'])) {
+                                             echo $house['price'];
+                                         }
+                                         ?></p>
                                 </div><!--/hPrice-->
                                 <div>                                   
                                     <p class="hStreet"><?php
@@ -156,19 +162,20 @@ include("includes/banner.php");
                                         ?></p> 
                                 </div><!--/hDetails-->
                                 <div class="alignBtn">                            
-                                    <button type="button" class="btnSubmit">Add to Favourites</button>
+<!--                                    <button class="btnSubmit" name="submit">Add to Favourites</button>-->
+                                    <a href="<?php echo ROOT; ?>admin/signin.php?h_id=<?php echo $house['hID']; ?>" class="btnSubmit">Add to Favourites</a>
                                 </div><!--/alignBtn-->
                             </div><!--/resStreetName-->
                         </div>  <!--/resHouse-->  
-                        <?php
-                    } // foreach
-                } // if $houses
-                ?>
+        <?php
+    } // foreach
+} // if $houses
+?>
             </section><!--/searchResults-->
         </div><!--/mainBody container-->
     </section><!--/ mainBody-->
 </main>
-<?php include("includes/footer.php"); ?> 
+                <?php include("includes/footer.php"); ?> 
 
 </div><!--/wrapper-->
 <script src="node_modules/jquery/dist/jquery.js"></script>
