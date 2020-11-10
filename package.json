@@ -6,7 +6,7 @@
   "main": "index.html",
   "scripts": {
     "test": "echo 'Error: no test specified' && exit 1",
-    "startServer": "browser-sync start --directory --proxy 'localhost/Payal_Priyadarshini_PHP_Project' --files 'build/js/*.js, *.php, build/css/*.css'"
+    "startServer": "browser-sync start --directory --proxy 'localhost/Payal_Priyadarshini_PHP_Project_Template' --files 'build/js/*.js, *.php, build/css/*.css'"
   },
   "dependencies": {
     "bootstrap": "^4.5.3",

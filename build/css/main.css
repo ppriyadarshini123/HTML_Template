@@ -290,7 +290,8 @@ a
         padding-top: 1vw;
         background-color: #FFFFFF;
         text-align: center; 
-        width:100%;    
+        width:100%;   
+        
     }
 
     .resHouse
@@ -466,6 +467,8 @@ a
     {
         margin-bottom: 1vw;
         margin-top: 1vw;
+        border-bottom: 1px solid #358016;
+        padding-bottom: 1vw;
     }
     .password
     {
@@ -890,13 +893,13 @@ a
         padding-top: 1vw;
         background-color: #FFFFFF;
         text-align: center; 
-        width:100%;    
+        width:100%;  
+        
     }
 
     .resHouse
     {
-        display: flex;  
-        margin-left: 1vw;
+        display: flex;          
     }
 
     .indexSubmit
@@ -1056,6 +1059,8 @@ a
     {
         margin-bottom: 1vw;
         margin-top: 1vw;
+        border-bottom: 1px solid #358016;
+        padding-bottom: 1vw;
     }
     .password
     {
@@ -1468,13 +1473,13 @@ a
         padding-top: 1vw;
         background-color: #FFFFFF;
         text-align: center; 
-        width:100%;    
+        width:100%;
+       
     }
 
     .resHouse
     {
-        display: flex;  
-        margin-left: 86px;
+        display: flex;        
     }
 
     .indexSubmit
@@ -1640,6 +1645,8 @@ a
     {
         margin-bottom: 1vw;
         margin-top: 1vw;
+        border-bottom: 1px solid #358016;
+        padding-bottom: 1vw;
     }
     .password
     {
@@ -2085,13 +2092,12 @@ a
         padding-top: 1vw;
         background-color: #FFFFFF;
         text-align: center; 
-        width:100%;    
+        width:100%;        
     }
 
     .resHouse
     {
-        display: flex;  
-        margin-left: 86px;
+        display: flex;          
     }
 
     .indexSubmit
@@ -2245,6 +2251,8 @@ a
     {
         margin-bottom: 1vw;
         margin-top: 1vw;
+        border-bottom: 1px solid #358016;
+        padding-bottom: 1vw;
     }
 
     .alignSignIn

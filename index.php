@@ -7,14 +7,19 @@
 include("includes/utilities.php");
 
 
-if ($dbok)
-{
+if ($dbok) {
     // DO NOT FORGET VALIDATION AND SANITATION!!!!    
-    $keySaleRent = isset($_GET['dropdown']) ? $_POST['dropdown'] : '';
-    $keyCityPostCode = isset($_GET['cityPostcode']) ? $_POST['cityPostcode'] : '';
-    $keyMin = isset($_GET['min']) ? $_POST['min'] : '';
-    $keyMax = isset($_GET['max']) ? $_POST['max'] : '';    
-    
+
+
+    $keySaleRent = isset($_GET['dropdown']) ? $_GET['dropdown'] : '';
+    $keyCityPostCode = isset($_GET['cityPostcode']) ? $_GET['cityPostcode'] : '';
+    $keyMin = isset($_GET['min']) ? $_GET['min'] : '';
+    $keyMax = isset($_GET['max']) ? $_GET['max'] : '';
+
+    trace($keySaleRent);
+    trace($keyCityPostCode);
+    trace($keyMin);
+    trace($keyMax);
     /*
       mysql wildcards:
      * => any value
@@ -26,26 +31,26 @@ if ($dbok)
     $q = "        
                 SELECT H.`price`, H.`image`, H.`details`, H.`postcode`, H.`city`, H.`streetname`, H.`housenumber`, H.`rsID`, H.`hID`, RS.`rsID`, RS.`rsRentSale`
                 FROM `house` H LEFT JOIN `rentsale` RS ON RS.`rsID` = H.`rsID`
-                WHERE
-                     RS.`rsRentSale` LIKE '%$keySaleRent%'
-                   OR        
+                WHERE     
                      H.`city` LIKE '%$keyCityPostCode%'  
                      OR        
                      H.`postcode` LIKE '%$keyCityPostCode%'
-                     OR        
-                     H.`price` BETWEEN '%$keyMin%' AND '%$keyMax%'
+                     AND       
+                     H.`price` BETWEEN '$keyMin' AND '$keyMax'
+                         AND H.rsID = '$keySaleRent'
         ";
 
+    trace($q);
     $res = $mysqli->query($q);
     trace($res);
-    
+
     if ($res->num_rows > 0) {
         $houses = [];
 
         while ($row = $res->fetch_assoc()) {
             array_push($houses, $row);
         } // while
-         trace($houses);
+        trace($houses);
     } else {
         displayMsg('Could not find house or something went wrong.', 'f');
     } # select check
@@ -64,41 +69,101 @@ include("includes/banner.php");
     <section class="mainBody">           
         <div class="contain">
             <section class="searchResults">
-                 <!-- ====================  FEEDBACK START =========-->
+                <!-- ====================  FEEDBACK START =========-->
                 <?php include("includes/feedback.php"); ?>
                 <!-- ====================  FEEDBACK END ===========-->
-                
+
                 <div class="headingCenter">
-                    <h1>Search Results</h1>
+                    <?php if (isset($keySaleRent)) { ?>
+                        <?php
+                        if ($keySaleRent == 1) {
+                            $v = "Rent";
+                        } else {
+                            $v = "Sale";
+                        }
+                        ?>
+                        <h1>Search Results for "<span class="qName"><?php
+                                echo "{$v},{$keyCityPostCode},{$keyMin},{$keyMax}";
+                                ;
+                                ?></span>"</h1>
+                <?php } // if key ?>
                 </div><!--headingCenter-->
-                <div class="resHouse flexCont"><!--result house-->
-                    <a class="hImage" href="houseDetails.php">
-                        <picture>
-                            <source media="(max-width: 359px)" srcset="build/imgs/house-359x300.png">
-                            <source media="(max-width: 768px)" srcset="build/imgs/house-432x239.png">
-                            <source media="(min-width: 1200px)" srcset="build/imgs/house-432x239.png">
-                            <img src="build/imgs/house-359x300.png" class="mobile" width="432"  height="239" title="Click for House Details"
-                                 alt="Click for House Details">
-                        </picture>
-                    </a><!--/hImage-->
-                    <div class="resStreetName">
-                        <div>
-                            <p class="hRentSale">House for Rent/Sale</p>
-                        </div><!--/hRentSale-->
-                        <div>
-                            <p class="hPrice">Price: £ 400k</p>
-                        </div><!--/hPrice-->
-                        <div>                                   
-                            <p class="hStreet">35 Osier Way, Cambridge, CB1 5FR</p> 
-                        </div><!--/hStreet-->  
-                        <div>                                   
-                            <p class="hDetails">4 bedroom detached house for sale</p> 
-                        </div><!--/hDetails-->
-                        <div class="alignBtn">                            
-                            <button type="button" class="btnSubmit">Add to Favourites</button>
-                        </div><!--/alignBtn-->
-                    </div><!--/resStreetName-->
-                </div>  <!--/resHouse-->             
+
+                <?php
+                if (isset($houses) && isset($dbok) && $dbok) {
+                    foreach ($houses as $house) {
+                        ?>
+
+                        <div class="resHouse flexCont"><!--result house-->
+                            <a class="hImage" href="<?php echo ROOT; ?>houseDetails.php">
+                                <picture>
+        <!--                                    <source media="(max-width: 359px)" srcset="<?php echo ROOT; ?>build/imgs/<?php
+                                    if (isset($house['image'])) {
+                                        echo $house['image'];
+                                    } else {
+                                        echo "no-image-359x198.png";
+                                    }
+                                    ?>">
+                                    <source media="(max-width: 768px)" srcset="<?php echo ROOT; ?>build/imgs/<?php echo ROOT; ?>build/imgs/<?php
+                                    if (isset($house['image'])) {
+                                        echo $house['image'];
+                                    } else {
+                                        echo "no-image-432x239.png";
+                                    }
+                                    ?>">
+                                    <source media="(min-width: 1200px)" srcset="<?php echo ROOT; ?>build/imgs/<?php echo ROOT; ?>build/imgs/<?php
+                                    if (isset($house['image'])) {
+                                        echo $house['image'];
+                                    } else {
+                                        echo "no-image-432x239.png";
+                                    }
+                                    ?>">-->
+                                    <img src="<?php echo ROOT; ?>build/imgs/<?php
+                                    if (isset($house['image'])) {
+                                        echo $house['image'];
+                                    } else {
+                                        echo "no-image-359x198.png";
+                                    }
+                                    ?>" class="mobile" width="432"  height="239" title="Click for House Details"
+                                         alt="Click for House Details">
+                                </picture>
+                            </a><!--/hImage-->
+                            <div class="resStreetName">
+                                <div>
+                                    <p class="hRentSale">House for <?php
+                                    echo $v;
+                                    ?></p>
+                                </div><!--/hRentSale-->
+                                <div>
+                                    <p class="hPrice">Price: £ <?php
+                                        if (isset($house['price'])) {
+                                            echo $house['price'];
+                                        }
+                                        ?></p>
+                                </div><!--/hPrice-->
+                                <div>                                   
+                                    <p class="hStreet"><?php
+                                        if (isset($house['housenumber'])) {
+                                            echo "{$house['housenumber']},{$house['streetname']},{$house['city']},{$house['postcode']}";
+                                        }
+                                        ?></p> 
+                                </div><!--/hStreet-->  
+                                <div>                                   
+                                    <p class="hDetails"><?php
+                                        if (isset($house['details'])) {
+                                            echo $house['details'];
+                                        }
+                                        ?></p> 
+                                </div><!--/hDetails-->
+                                <div class="alignBtn">                            
+                                    <button type="button" class="btnSubmit">Add to Favourites</button>
+                                </div><!--/alignBtn-->
+                            </div><!--/resStreetName-->
+                        </div>  <!--/resHouse-->  
+                        <?php
+                    } // foreach
+                } // if $houses
+                ?>
             </section><!--/searchResults-->
         </div><!--/mainBody container-->
     </section><!--/ mainBody-->

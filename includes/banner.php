@@ -9,13 +9,13 @@
     <div class="containerSearchPanel">  
         <h1 class="mainName">Search</h1>
         <div class="redDash"></div><!-- redDash -->
-        <form method="post" action="#" class="fields">
+        <form method="get" action="#" class="fields">
             <div class="centerAlign">
                 <div class="alignView">
                     <label for="ddSaleRent" class="spSaleRent">Sale/Rent :</label>   
                     <select id="ddSaleRent" title="ddSaleRent" name="dropdown" class="ddSaleRent">
-                        <option value="sale">For Sale</option>
-                        <option value="rent">For Rent</option>
+                        <option value="2">For Sale</option>
+                        <option value="1">For Rent</option>
                     </select>             
                 </div>  <!-- saleRent -->
                 <div class="alignView">
@@ -31,7 +31,7 @@
                     <input name="max" type="number" placeholder="450k" required step="100" id="max">
                 </div><!-- Max -->   
                 <div class="indexSubmit">
-                    <button type="button" class="btnSubmit">Submit</button>
+                    <button class="btnSubmit">Submit</button>
                 </div><!-- submit Button -->
             </div><!--/centerAlign-->
         </form>
