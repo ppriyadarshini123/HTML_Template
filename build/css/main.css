@@ -30,7 +30,10 @@ html, body
 
 body
 {
-    font-family: "Roboto", Sans-serif; background-color: #fff;
+/*    font-family: "Roboto", Sans-serif; background-color: #fff;*/
+    font-family: parkside, cursive;
+    font-style: normal;
+    font-weight: 100;
 }
 
 a
@@ -373,7 +376,7 @@ a
 
     .alignBtnFav
     {
-        margin-top: 2vw;
+        margin-top: 11vw;
     }
 
     .flexAlign
@@ -384,6 +387,8 @@ a
     {
         width: 100%;
         max-width: 100%;
+        margin-top: 6vw;
+        margin-bottom: 6vw;
     }
 
     .dispGrid
@@ -976,6 +981,8 @@ a
     .flexAlignInline
     {
         display: inline-flex;
+        margin-top: 1vw;
+        margin-bottom: 1vw;
     }
 
     .dispGrid
@@ -1557,6 +1564,8 @@ a
     .flexAlignInline
     {
         display: inline-flex;
+        margin-top: 1vw;
+        margin-bottom: 1vw;
     }
 
     .dispGrid
@@ -2175,6 +2184,8 @@ a
     .flexAlignInline
     {
         display: inline-flex;
+        margin-top: 1vw;
+        margin-bottom: 1vw;
     }
 
     .dispGrid

@@ -6,27 +6,24 @@
  */
 include("includes/utilities.php");
 
-
 if ($dbok) {
     // DO NOT FORGET VALIDATION AND SANITATION!!!!    
-
 
     $keySaleRent = isset($_GET['dropdown']) ? $_GET['dropdown'] : '';
     $keyCityPostCode = isset($_GET['cityPostcode']) ? $_GET['cityPostcode'] : '';
     $keyMin = isset($_GET['min']) ? $_GET['min'] : '';
     $keyMax = isset($_GET['max']) ? $_GET['max'] : '';
 
-    trace($keySaleRent);
-    trace($keyCityPostCode);
-    trace($keyMin);
-    trace($keyMax);
+//    trace($keySaleRent);
+//    trace($keyCityPostCode);
+//    trace($keyMin);
+//    trace($keyMax);
     /*
       mysql wildcards:
      * => any value
       % => any substring
       _ => any character
      */
-
 
     $q = "        
                 SELECT H.`price`, H.`image`, H.`details`, H.`postcode`, H.`city`, H.`streetname`, H.`housenumber`, H.`rsID`, H.`hID`, RS.`rsID`, RS.`rsRentSale`
@@ -40,9 +37,9 @@ if ($dbok) {
                          AND H.rsID = '$keySaleRent'
         ";
 
-    trace($q);
+//    trace($q);
     $res = $mysqli->query($q);
-    trace($res);
+//    trace($res);
 
     if ($res->num_rows > 0) {
         $houses = [];
@@ -51,14 +48,12 @@ if ($dbok) {
             array_push($houses, $row);
             
         } // while
-        trace($houses);
+//        trace($houses);
     } else {
         displayMsg('Could not find house or something went wrong.', 'f');
     } # select check
 } ### search logic
 # 
-# 
-
 # 
 //   THIS IS THE BEGINNING OF THE MARKUP
 include("includes/top.php");
@@ -86,7 +81,7 @@ include("includes/banner.php");
     ?>
                         <h1>Search Results for "<span class="qName"><?php
                         echo "{$v},{$keyCityPostCode},{$keyMin},{$keyMax}";
-                        ;
+                        
                         ?></span>"</h1>
                     <?php } // if key ?>
                 </div><!--headingCenter-->
