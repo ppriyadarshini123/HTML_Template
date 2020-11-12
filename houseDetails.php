@@ -114,7 +114,8 @@ if (isset($house)) {
     <?php
     if (isset($house['price'])) {
         echo($house['price']);
-    }
+    } else
+                                             echo '--';
     ?>
                                 k</p>
                         </div><!-- price-->
@@ -122,21 +123,24 @@ if (isset($house)) {
                             <p class="hStreet"> <?php
                             if (isset($house['housenumber'])) {
                                 echo "{$house['housenumber']},{$house['streetname']},{$house['city']},{$house['postcode']}";
-                            }
+                            } else
+                                             echo '--';
     ?></p> 
                         </div><!--/StreetName-->  
                         <div>                                   
                             <p class="hDetails">  <?php
                             if (isset($house['details'])) {
                                 echo($house['details']);
-                            }
+                            } else
+                                             echo '--';
     ?></p> 
                         </div><!--/hDetails-->
                         <div>                                   
                             <p class="hPD">Property Dealer: <?php
                             if (isset($house['uName'])) {
                                 echo($house['uName']);
-                            }
+                            } else
+                                             echo '--';
     ?></p> 
                         </div><!--/hPD-->
                         <div class="flexAlignInline">

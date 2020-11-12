@@ -140,6 +140,8 @@ include("includes/banner.php");
                                          if (isset($house['price'])) {
                                              echo $house['price'];
                                          }
+                                         else
+                                             echo '--';
                                          ?></p>
                                 </div><!--/hPrice-->
                                 <div>                                   
@@ -147,13 +149,16 @@ include("includes/banner.php");
                                         if (isset($house['housenumber'])) {
                                             echo "{$house['housenumber']},{$house['streetname']},{$house['city']},{$house['postcode']}";
                                         }
+                                        else
+                                             echo '--';
                                         ?></p> 
                                 </div><!--/hStreet-->  
                                 <div>                                   
                                     <p class="hDetails"><?php
                                         if (isset($house['details'])) {
                                             echo $house['details'];
-                                        }
+                                        } else
+                                             echo '--';
                                         ?></p> 
                                 </div><!--/hDetails-->
                                 <div class="alignBtn">                            
