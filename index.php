@@ -125,7 +125,7 @@ include("includes/banner.php");
                                     } else {
                                         echo "no-image-359x198.png";
                                     }
-                                    ?>" class="mobile" width="432"  height="239" title="Click for House Details"
+                                    ?>" class="mobile"  title="Click for House Details"
                                          alt="Click for House Details">
                                 </picture>
                             </a><!--/hImage-->

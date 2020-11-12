@@ -30,7 +30,13 @@ html, body
 
 body
 {
-/*    font-family: "Roboto", Sans-serif; background-color: #fff;*/
+   font-family: "Roboto", Sans-serif; background-color: #fff;*/
+/*    font-family: parkside, cursive;
+    font-style: normal;
+    font-weight: 100;*/
+}
+
+@font-face {
     font-family: parkside, cursive;
     font-style: normal;
     font-weight: 100;
@@ -240,6 +246,20 @@ a
         font-weight: 400;
         font-style: normal;
     }
+    
+    input[type=number]
+    {
+        width: 30vw;
+    } 
+    input[type=text]
+    {
+        width: 35vw;
+    } 
+    select
+    {
+        width: 31vw;
+    }
+    
     .align
     {
         color: #358016;
@@ -306,7 +326,7 @@ a
     {
         margin-bottom: 1vw;
         text-align: center;
-        margin-top: 5vw;
+        margin-top: 3vw;
     }
 
     .hImage
@@ -352,7 +372,7 @@ a
 
     .mobile
     {
-        max-width: fit-content;
+        width: 359px;
     }
 
     .con
@@ -366,6 +386,11 @@ a
     .housedetails
     {
 
+    }
+    
+    .carousel-inner
+    {
+        margin-bottom: 1vw;
     }
 
     .resStreetNameDetails
@@ -627,8 +652,8 @@ a
 
     .alignBtn
     {   
-        /*    margin-top: 1vw;
-            margin-left: 2vw;*/
+        margin-top: 7vw;
+        margin-bottom: 7vw;
         text-align: center;
     }
 
@@ -845,6 +870,23 @@ a
         font-weight: 400;
         font-style: normal;
     }
+    
+    input[type=number]
+    {
+        width: 11vw;
+    } 
+   
+    input[type=text]
+    {
+        width: 17vw;
+    } 
+    
+    select
+    {
+        width: 11vw;
+    }
+    
+
     .align
     {
         color: #358016;
@@ -861,7 +903,8 @@ a
 
     .fields
     {
-        text-align: center;  
+        text-align: center; 
+        font-size: 2vw;
     }
 
     .btnSubmit
@@ -917,6 +960,10 @@ a
     {
 
     }
+    .mobile
+    {
+        width:90%;
+    }
 
     .resStreetName
     {
@@ -960,6 +1007,10 @@ a
     .housedetails
     {
 
+    }
+    .carousel-inner
+    {
+        margin-bottom: 1vw;
     }
 
     .resStreetNameDetails
@@ -1068,6 +1119,7 @@ a
         margin-top: 1vw;
         border-bottom: 1px solid #358016;
         padding-bottom: 1vw;
+        width: 100%;
     }
     .password
     {
@@ -1214,8 +1266,8 @@ a
 
     .alignBtn
     {   
-        /*    margin-top: 1vw;
-            margin-left: 2vw;*/
+        margin-top: 1vw;
+        margin-bottom: 1vw;
         text-align: center;
     }
 
@@ -1430,6 +1482,23 @@ a
         font-weight: 400;
         font-style: normal;
     }
+    
+     input[type=number]
+    {
+        width: 7vw;
+    } 
+    
+     input[type=text]
+    {
+        width: 7vw;
+    } 
+    
+    select
+    {
+        width: 7vw;
+    }
+    
+    
     .align
     {
         color: #358016;
@@ -1493,7 +1562,7 @@ a
     {
         margin-bottom: 1vw;
         text-align: center;
-        margin-top: 1vw;
+        
     }
 
     .hImage
@@ -1545,6 +1614,11 @@ a
 
     }
 
+    .carousel-inner
+    {
+        margin-bottom: 1vw;
+    }
+    
     .resStreetNameDetails
     {
         margin-bottom: 1vw;
@@ -1795,8 +1869,8 @@ a
 
     .alignBtn
     {   
-        /*    margin-top: 1vw;
-            margin-left: 2vw;*/
+            margin-top: 1vw;
+          /*  margin-left: 2vw;*/
         text-align: center;
     }
 
@@ -2039,6 +2113,22 @@ a
         margin-right: auto;
         margin-bottom: 1vw;
     }
+    input[type=number]
+    {
+        width: 7vw;
+    } 
+    
+     input[type=text]
+    {
+        width: 7vw;
+    } 
+    
+    select
+    {
+        width: 7vw;
+    }
+    
+    
     .mainName
     {
         font-size: 42px;
@@ -2112,7 +2202,7 @@ a
     .indexSubmit
     {
         margin-bottom: 1vw;
-        margin-top: 2vw;
+       
         text-align: center;
     }
 
@@ -2163,6 +2253,11 @@ a
     .housedetails
     {
 
+    }
+    
+    .carousel-inner
+    {
+        margin-bottom: 1vw;
     }
 
     .resStreetNameDetails
@@ -2413,8 +2508,8 @@ a
 
     .alignBtn
     {   
-        /*    margin-top: 1vw;
-            margin-left: 2vw;*/
+            margin-top: 1vw;
+           /* margin-left: 2vw;*/
         text-align: center;
     }
 

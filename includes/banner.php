@@ -13,22 +13,22 @@
             <div class="centerAlign">
                 <div class="alignView">
                     <label for="ddSaleRent" class="spSaleRent">Sale/Rent :</label>   
-                    <select id="ddSaleRent" title="ddSaleRent" name="dropdown" class="ddSaleRent">
+                    <select id="ddSaleRent" title="ddSaleRent"  name="dropdown" class="ddSaleRent">
                         <option value="2">For Sale</option>
                         <option value="1">For Rent</option>
                     </select>             
                 </div>  <!-- saleRent -->
                 <div class="alignView">
                     <label for="citypostcode" class="spPostcode">Postcode :</label>                             
-                    <input name="cityPostcode" title = "postcode" type="text" id="citypostcode" class="fields" placeholder="City/Postcode" required>
+                    <input name="cityPostcode" title = "postcode" type="text" size="10" id="citypostcode" class="fields" placeholder="City/Postcode" required>
                 </div><!-- City/Postcode -->
                 <div class="alignView">                
                     <label for="min" class="spMin">Min :</label>
-                    <input name="min" type="number" placeholder="0" required step="100" id="min">
+                    <input name="min" type="number" placeholder="0k" width="2vw" required step="100" id="min">
                 </div><!-- Min -->
                 <div class="alignView">
                     <label for="max" class="spMax">Max :</label>
-                    <input name="max" type="number" placeholder="450k" required step="100" id="max">
+                    <input name="max" type="number" placeholder="450k" width="2vw" size="5" required step="100" id="max">
                 </div><!-- Max -->   
                 <div class="indexSubmit">
                     <button class="btnSubmit">Submit</button>
