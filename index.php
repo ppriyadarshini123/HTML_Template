@@ -27,9 +27,9 @@ if ($dbok) {
 
     $q = "        
                 SELECT H.`price`, H.`image`, H.`details`, H.`postcode`, H.`city`, H.`streetname`, H.`housenumber`, H.`rsID`, H.`hID`, RS.`rsID`, RS.`rsRentSale`
-                FROM `house` H LEFT JOIN `rentsale` RS ON RS.`rsID` = H.`rsID`
+                FROM `" . DBN . "`.`house` H LEFT JOIN `" . DBN . "`.`rentsale` RS ON RS.`rsID` = H.`rsID`
                 WHERE     
-                     H.`city` LIKE '%$keyCityPostCode%'  
+                    H.`city` LIKE '%$keyCityPostCode%'  
                      OR        
                      H.`postcode` LIKE '%$keyCityPostCode%'
                      AND       

@@ -86,3 +86,14 @@ function displayMsg($msg, $type){
     }
   }// f
 }//displayMsg
+
+
+/**
+ * @name          startSessionOnce
+ * @description   this will start session only if not started yet
+ */
+function startSessionOnce() {
+  if(!isset($_SESSION)){
+    session_start();
+  }
+} // startSessionOnce
