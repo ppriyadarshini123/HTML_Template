@@ -150,7 +150,7 @@ include("includes/header.php");
                         <div class="flexAlignInline">
                             <div class="alignBtnFav">
     <!--                                <input name="AddtoFavourites" type="submit" class="btnSubmit" value="Add to Favourites">-->
-                                <a href="<?php echo ROOT; ?>admin/signin.php?h_id=<?php echo $house['hID']; ?>" class="btnSubmit">Add to Favourites</a>
+                                <a href="<?php echo ROOT; ?>admin/signin.php?h_id=<?php echo $house['hID']; ?>&page=houseDetails.php" class="btnSubmit">Add to Favourites</a>
                             </div><!--/alignBtnFav-->
                             <div class="alignBtnFav">
     <!--                                <input name="ContactPropertyDealer" type="submit" class="btnSubmit" value="Contact Property Dealer">-->
