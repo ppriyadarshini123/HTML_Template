@@ -13,16 +13,20 @@ if ($dbok) {
 
 //    trace($keyID);
     $q = "        
-               SELECT H.`hID`, H.`rsID`, H.`housenumber`, H.`streetname`, H.`city`, H.`postcode`, H.`details`, H.`image`, H.`floorplan`, H.`uID`, H.`price`, U.`uName`, U.`email`
+               SELECT H.`hID`, H.`rsID`, H.`housenumber`, H.`streetname`, H.`city`, H.`postcode`, H.`details`, H.`image`, H.`floorplan`, H.`price`, HU.`uID`, U.`email`, U.`uName`
 FROM `house` H
-LEFT JOIN  `user` U 
-ON U.`uID` = H.`uID` 
+LEFT JOIN `houseuser` HU
+ON H.`hID` = HU.`hID`
+LEFT JOIN `user` U
+ON HU.`uID` = U.`uID`
+LEFT JOIN `userroles` UR
+ON U.`uID` = UR.`urID`
 WHERE     
-                     H.hID = '$keyID' LIMIT 1
-                
+                     H.`hID` = '$keyID' AND UR.`urRole` = 'Property Dealer' LIMIT 1 
+               
         ";
 
-//    trace($q);
+    trace($q);
     $res = $mysqli->query($q);
 //    trace($res);
     $house = $res->fetch_assoc();
@@ -38,9 +42,9 @@ include("includes/header.php");
 </div><!--/topHeader-->
 </header>
 <main>
-<?php
-if (isset($house)) {
-    ?>
+    <?php
+    if (isset($house)) {
+        ?>
         <section class="mainBody">           
             <div class="contain housedetails">
                 <div class="headingCenter">
@@ -56,30 +60,30 @@ if (isset($house)) {
                         <div class="carousel-inner">
                             <div class="carousel-item active">  
                                 <img class="d-block w-100"  src="<?php echo ROOT; ?>build/imgs/<?php
-    if (isset($house['image'])) {
-        echo(explode(";", $house['image'])[0]); //explode is a string function to break the string from ; into arrays                                        
-    } else {
-        echo "no-image-359x198.png";
-    } //explode is a string function to break the string from ; into arrays                                       
-    ?>" alt="First slide">                               
+                                if (isset($house['image'])) {
+                                    echo(explode(";", $house['image'])[0]); //explode is a string function to break the string from ; into arrays                                        
+                                } else {
+                                    echo "no-image-359x198.png";
+                                } //explode is a string function to break the string from ; into arrays                                       
+                                ?>" alt="First slide">                               
                             </div><!-- carousel-item active-->
                             <div class="carousel-item">
                                 <img class="d-block w-100"  src="<?php echo ROOT; ?>build/imgs/<?php
-                                 if (isset($house['image'])) {
-                                     echo(explode(";", $house['image'])[1]); //explode is a string function to break the string from ; into arrays                                        
-                                 } else {
-                                     echo "no-image-359x198.png";
-                                 } //explode is a string function to break the string from ; into arrays                                        
-    ?>" alt="Second slide">                             
+                                if (isset($house['image'])) {
+                                    echo(explode(";", $house['image'])[1]); //explode is a string function to break the string from ; into arrays                                        
+                                } else {
+                                    echo "no-image-359x198.png";
+                                } //explode is a string function to break the string from ; into arrays                                        
+                                ?>" alt="Second slide">                             
                             </div><!-- carousel-item-->
                             <div class="carousel-item">
                                 <img class="d-block w-100"  src="<?php echo ROOT; ?>build/imgs/<?php
-                                 if (isset($house['image'])) {
-                                     echo(explode(";", $house['image'])[2]); //explode is a string function to break the string from ; into arrays                                        
-                                 } else {
-                                     echo "no-image-359x198.png";
-                                 } //explode is a string function to break the string from ; into arrays                                        
-    ?>" alt="Third slide">                                
+                                if (isset($house['image'])) {
+                                    echo(explode(";", $house['image'])[2]); //explode is a string function to break the string from ; into arrays                                        
+                                } else {
+                                    echo "no-image-359x198.png";
+                                } //explode is a string function to break the string from ; into arrays                                        
+                                ?>" alt="Third slide">                                
                             </div><!-- carousel-item-->
                         </div><!-- carousel-inner-->
                         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -100,48 +104,48 @@ if (isset($house)) {
                     <div class="resStreetNameDetails" id="clickedDivDetails">
                         <div>
                             <p class="hRentSale">House for <?php
-                            if (isset($house['rsID'])) {
-                                if ($house['rsID'] == 1)
-                                    echo("Rent");
-                                else {
-                                    echo("Sale");
+                                if (isset($house['rsID'])) {
+                                    if ($house['rsID'] == 1)
+                                        echo("Rent");
+                                    else {
+                                        echo("Sale");
+                                    }
                                 }
-                            }
-    ?></p>
+                                ?></p>
                         </div><!-- rent/sale-->
                         <div>
                             <p class="hPrice">Price: £ 
-    <?php
-    if (isset($house['price'])) {
-        echo($house['price']);
-    } else
-                                             echo '--';
-    ?>
+                                <?php
+                                if (isset($house['price'])) {
+                                    echo($house['price']);
+                                } else
+                                    echo '--';
+                                ?>
                                 k</p>
                         </div><!-- price-->
                         <div>                                   
                             <p class="hStreet"> <?php
-                            if (isset($house['housenumber'])) {
-                                echo "{$house['housenumber']},{$house['streetname']},{$house['city']},{$house['postcode']}";
-                            } else
-                                             echo '--';
-    ?></p> 
+                                if (isset($house['housenumber'])) {
+                                    echo "{$house['housenumber']},{$house['streetname']},{$house['city']},{$house['postcode']}";
+                                } else
+                                    echo '--';
+                                ?></p> 
                         </div><!--/StreetName-->  
                         <div>                                   
                             <p class="hDetails">  <?php
-                            if (isset($house['details'])) {
-                                echo($house['details']);
-                            } else
-                                             echo '--';
-    ?></p> 
+                                if (isset($house['details'])) {
+                                    echo($house['details']);
+                                } else
+                                    echo '--';
+                                ?></p> 
                         </div><!--/hDetails-->
                         <div>                                   
                             <p class="hPD">Property Dealer: <?php
-                            if (isset($house['uName'])) {
-                                echo($house['uName']);
-                            } else
-                                             echo '--';
-    ?></p> 
+                                if (isset($house['uName'])) {
+                                    echo($house['uName']);
+                                } else
+                                    echo '--';
+                                ?></p> 
                         </div><!--/hPD-->
                         <div class="flexAlignInline">
                             <div class="alignBtnFav">
@@ -164,11 +168,11 @@ if (isset($house)) {
                 </section><!--/searchResults-->
             </div><!--/wrapper mainBody container-->
         </section><!--/mainBody-->
-    <?php
-}
-?> 
+        <?php
+    }
+    ?> 
 </main>
-    <?php include("includes/footer.php"); ?> 
+<?php include("includes/footer.php"); ?> 
 </div><!--/wrapper-->
 <!-- add your JS here-->
 <script src="node_modules/jquery/dist/jquery.js"></script>

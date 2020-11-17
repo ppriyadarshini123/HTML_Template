@@ -80,25 +80,27 @@ if(isset($dbok) && $dbok) {
 
 
 
-  } ######## login form submisison
+  } ######## login form submission
 
   //add to favourites
-  if(isset($_GET['h_id'])) 
+  if(isset($_GET['h_id']) && isset($_SESSION['logID']) ) 
   {
     // DO NOT FORGET VALIDATION AND SANITATION!!!!    
-    $keyhouseID = $_GET['h_ID'];
-//    $q = "INSERT INTO "
-//            . "`" . DBN . "`.user (hID)
-//            VALUES ('')
-//            WHERE uID = " . $_SESSION['logID'] .";";
+    $keyhouseID = $_GET['h_id'];
+   $q = "INSERT INTO "
+           . "`" . DBN . "`.houseuser (hID)
+            VALUES ('".$_GET['h_id']."')
+            WHERE `user`.uID = " . $_SESSION['logID'] .";";
     
             "UPDATE " . "`" . DBN . "`.user(hID)
             SET hID = " . $keyhouseID
-            . "WHERE uID = " . $_SESSION['logID'] .";";"
+            . "WHERE uID = " . $_SESSION['logID'] .";";
   }
 
 } // dbok
 ?>
+
+
 </div><!--/topHeader-->
 </header>
 </div><!--/wrapper--> 

@@ -9,15 +9,15 @@ include("includes/utilities.php");
 if ($dbok) {
     // DO NOT FORGET VALIDATION AND SANITATION!!!!    
 
-    $keySaleRent = isset($_GET['dropdown']) ? $_GET['dropdown'] : '';
+    $keySaleRent = isset($_GET['dropdown']) ? $_GET['dropdown'] : '2';
     $keyCityPostCode = isset($_GET['cityPostcode']) ? $_GET['cityPostcode'] : '';
-    $keyMin = isset($_GET['min']) ? $_GET['min'] : '';
-    $keyMax = isset($_GET['max']) ? $_GET['max'] : '';
+    $keyMin = isset($_GET['min']) ? $_GET['min'] : '0';
+    $keyMax = isset($_GET['max']) ? $_GET['max'] : '0';
 
-//    trace($keySaleRent);
-//    trace($keyCityPostCode);
-//    trace($keyMin);
-//    trace($keyMax);
+    trace($keySaleRent);
+    trace($keyCityPostCode);
+    trace($keyMin);
+    trace($keyMax);
     /*
       mysql wildcards:
      * => any value
@@ -27,19 +27,28 @@ if ($dbok) {
 
     $q = "        
                 SELECT H.`price`, H.`image`, H.`details`, H.`postcode`, H.`city`, H.`streetname`, H.`housenumber`, H.`rsID`, H.`hID`, RS.`rsID`, RS.`rsRentSale`
-                FROM `" . DBN . "`.`house` H LEFT JOIN `" . DBN . "`.`rentsale` RS ON RS.`rsID` = H.`rsID`
+                FROM `" . DBN . "`.`house` H 
+                LEFT JOIN `" . DBN . "`.`rentsale` RS 
+                    ON RS.`rsID` = H.`rsID`
+                LEFT JOIN `houseuser` HU
+					ON H.`hID` = HU.`hID`
+				LEFT JOIN `user` U
+					ON HU.`uID` = U.`uID`
+				LEFT JOIN `userroles` UR
+					ON U.`uID` = UR.`urID`                    
                 WHERE     
-                    H.`city` LIKE '%$keyCityPostCode%'  
-                     OR        
-                     H.`postcode` LIKE '%$keyCityPostCode%'
-                     AND       
-                     H.`price` BETWEEN '$keyMin' AND '$keyMax'
-                         AND H.rsID = '$keySaleRent'
+                    H.rsID = '$keySaleRent' AND UR.`urRole` = 'Property Dealer'
+                    AND H.`city` LIKE '%$keyCityPostCode%'  
+                    OR        
+                    H.`postcode` LIKE '%$keyCityPostCode%'
+                    AND       
+                    H.`price` BETWEEN '$keyMin' AND '$keyMax'
+                    
         ";
 
-//    trace($q);
+   trace($q);
     $res = $mysqli->query($q);
-//    trace($res);
+   trace($res);
 
     if ($res->num_rows > 0) {
         $houses = [];
