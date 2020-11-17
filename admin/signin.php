@@ -11,18 +11,18 @@ include("../includes/top.php");
 include("../includes/header.php");
 
 
-if(isset($dbok) && $dbok) {
+if (isset($dbok) && $dbok) {
 
-  // form handling
-  if( isset($_POST['login']) ) {
-    /**
-     * never forget form validation and sanitation
-     * (see contacts.php)
-     */
-      $logEmail   = $_POST['email'];
-      $logPsw     = $_POST['password'];
+    // form handling
+    if (isset($_POST['login'])) {
+        /**
+         * never forget form validation and sanitation
+         * (see contacts.php)
+         */
+        $logEmail = $_POST['email'];
+        $logPsw = $_POST['password'];
 
-      $q = "
+        $q = "
         SELECT
             * 
         FROM
@@ -33,70 +33,96 @@ if(isset($dbok) && $dbok) {
             `user`.`pwd` = '$logPsw'      
       ";
 
-      echo $q;
+        echo $q;
 
-      $res = $mysqli->query($q);
+        $res = $mysqli->query($q);
 
-      trace($res);
-      
-      if( $res->num_rows === 1 ) {
-        // user is allowed
-        $user = $res->fetch_assoc();
-        // trace($user);
+        trace($res);
 
-        trace($user);
-        /**
-         *  we can store persistent data
-         * 1) on the client using $_COOKIE -> do not use for sensitive data
-         * 2) store securely in $_SESSION  -> good for login, sensitive data etc
-         *--------------------------------------
-         *
-         *
-         * $_SESSION:
-         * it's a superglobal
-         * it's only accessible AFTER we start the session using session_start()
-         * it's only populated by code
-         *
-         * ----------
-         * sessions should start only once, before any output
-         *
-         */
-          /*session_start();
-          $_SESSION['test'] = 'this is a demo';
-          trace($_SESSION);
-          session_destroy();*/
-          // starting  session
-          startSessionOnce();
-          // storing user name and id in $_SESSION
-          $_SESSION['logID']      =   $user['uID'];
-          $_SESSION['logNAME']    =   $user['uName'];
+        if ($res->num_rows === 1) {
+            // user is allowed
+            $user = $res->fetch_assoc();
+            // trace($user);
 
-          // redirecting user to viewProducts.php
-          header('location:' . ROOT . 'admin/viewHouses.php');
-      } else {
-        // user is not allowed
-        $failMsg = "Could not log in, please try again.";
-      } #### select check
+            trace($user);
+            /**
+             *  we can store persistent data
+             * 1) on the client using $_COOKIE -> do not use for sensitive data
+             * 2) store securely in $_SESSION  -> good for login, sensitive data etc
+             * --------------------------------------
+             *
+             *
+             * $_SESSION:
+             * it's a superglobal
+             * it's only accessible AFTER we start the session using session_start()
+             * it's only populated by code
+             *
+             * ----------
+             * sessions should start only once, before any output
+             *
+             */
+            /* session_start();
+              $_SESSION['test'] = 'this is a demo';
+              trace($_SESSION);
+              session_destroy(); */
+            // starting  session
+            startSessionOnce();
+            // storing user name and id in $_SESSION
+            $_SESSION['logID'] = $user['uID'];
+            $_SESSION['logNAME'] = $user['uName'];
 
+            // redirecting user to viewProducts.php
+            if (!isset($_GET['page']))
+                header('location:' . ROOT . 'admin/viewHouses.php');
+            else {
+                    //add to favourites
+                if (isset($_GET['h_id']) && isset($_GET['page'])) {
+                    $page = $_GET['page'];
+                    // DO NOT FORGET VALIDATION AND SANITATION!!!!    
+                    $keyhouseID = $_GET['h_id'];
 
+                    //select - check if the house is already added as a favourite for the user 
+                    //- to avoid duplicate data in database
+                    $qselect = "SELECT hID, uID FROM ". "`" . DBN . "`.`houseuser` WHERE hID = " . $keyhouseID . " AND uID = " . $_SESSION['logID'] . " ";
+                         
+                    trace($qselect);
+                    
+                    $res = $mysqli->query($qselect);
 
-  } ######## login form submission
+                    trace($res);
 
-  //add to favourites
-  if(isset($_GET['h_id']) && isset($_SESSION['logID']) ) 
-  {
-    // DO NOT FORGET VALIDATION AND SANITATION!!!!    
-    $keyhouseID = $_GET['h_id'];
-   $q = "INSERT INTO "
-           . "`" . DBN . "`.houseuser (hID)
-            VALUES ('".$_GET['h_id']."')
-            WHERE `user`.uID = " . $_SESSION['logID'] .";";
-    
-            "UPDATE " . "`" . DBN . "`.user(hID)
-            SET hID = " . $keyhouseID
-            . "WHERE uID = " . $_SESSION['logID'] .";";
-  }
+                    if ($res->num_rows === 1) {                     
+                        // House is already added as the user'sfavourite
+                        $failMsg = "House already added as your Favourite";                        
+                    }//if
+                    else //house is not already added a a favourite
+                    {
+                            //Insert into database only if it does not exist
+                            $qinsert = " INSERT INTO "
+                                    . "`" . DBN . "`.`houseuser`(`hID`, `uID`) 
+                                     VALUES (" . $keyhouseID . "," . $_SESSION['logID'] . ")"
+                     ;
 
+                            trace($qinsert);
+                            $eRes = $mysqli->query($qinsert);
+
+                            if ($mysqli->affected_rows === 1) {
+                                $successMsg = "House added as your Favourite";
+                            } else {
+                                $failMsg = "Could not add House as favourite";
+                            } ### update check
+
+        //                    header('location:' . ROOT . '' . $page . '');
+                    } 
+                }//if
+            }//else
+        } 
+        
+        else {
+            // user is not allowed
+            $failMsg = "Could not log in, please try again.";
+        } #### select check
+    } //if (isset($_POST['login']))
 } // dbok
 ?>
 
@@ -125,6 +151,9 @@ if(isset($dbok) && $dbok) {
                             </div><!-- submit Button --> 
                         </div>  <!--/signin-->   
                     </form>
+                    <!-- ====================  FEEDBACK START =========-->
+                    <?php include("../includes/feedback.php"); ?>
+                <!-- ====================  FEEDBACK END ===========-->
                 </div>
             </section><!--/signinpage-->
         </div><!--/container-->

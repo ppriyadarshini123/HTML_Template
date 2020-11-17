@@ -172,7 +172,7 @@ include("includes/banner.php");
                                 </div><!--/hDetails-->
                                 <div class="alignBtn">                            
 <!--                                    <button class="btnSubmit" name="submit">Add to Favourites</button>-->
-                                    <a href="<?php echo ROOT; ?>admin/signin.php?h_id=<?php echo $house['hID']; ?>" class="btnSubmit">Add to Favourites</a>
+                                    <a href="<?php echo ROOT; ?>admin/signin.php?h_id=<?php echo $house['hID']; ?>&page=index.php" class="btnSubmit">Add to Favourites</a>
                                 </div><!--/alignBtn-->
                             </div><!--/resStreetName-->
                         </div>  <!--/resHouse-->  

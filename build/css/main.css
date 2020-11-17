@@ -1893,8 +1893,7 @@ a
 
     .successMsg{
         background-color: darkgreen;
-        border:5px solid darkgreen;
-        background-image: url("../../build/imgs/yep.png");
+        border:5px solid darkgreen;        
         background-position: right;
         background-repeat: no-repeat;
         background-size: contain;
