@@ -9,10 +9,12 @@ include("../includes/utilities.php");
 //   THIS IS THE BEGINNING OF THE MARKUP
 include("../includes/top.php");
 include("../includes/header.php");
+include("../includes/topNav.php");
 
 
-if (isset($dbok) && $dbok) {
+if (isset($dbok) && $dbok && !is_logged_in()) {
 
+    include("../includes/topNav.php");
     // form handling
     if (isset($_POST['login'])) {
         /**
@@ -33,18 +35,18 @@ if (isset($dbok) && $dbok) {
             `user`.`pwd` = '$logPsw'      
       ";
 
-        echo $q;
+//        echo $q;
 
         $res = $mysqli->query($q);
 
-        trace($res);
+//        trace($res);
 
         if ($res->num_rows === 1) {
             // user is allowed
             $user = $res->fetch_assoc();
             // trace($user);
 
-            trace($user);
+//            trace($user);
             /**
              *  we can store persistent data
              * 1) on the client using $_COOKIE -> do not use for sensitive data
@@ -71,11 +73,11 @@ if (isset($dbok) && $dbok) {
             $_SESSION['logID'] = $user['uID'];
             $_SESSION['logNAME'] = $user['uName'];
 
-            // redirecting user to viewProducts.php
+            // redirecting user to viewHouses.php after logging in
             if (!isset($_GET['page']))
                 header('location:' . ROOT . 'admin/viewHouses.php');
             else {
-                    //add to favourites
+                //add to favourites
                 if (isset($_GET['h_id']) && isset($_GET['page'])) {
                     $page = $_GET['page'];
                     // DO NOT FORGET VALIDATION AND SANITATION!!!!    
@@ -83,45 +85,42 @@ if (isset($dbok) && $dbok) {
 
                     //select - check if the house is already added as a favourite for the user 
                     //- to avoid duplicate data in database
-                    $qselect = "SELECT hID, uID FROM ". "`" . DBN . "`.`houseuser` WHERE hID = " . $keyhouseID . " AND uID = " . $_SESSION['logID'] . " ";
-                         
-                    trace($qselect);
-                    
+                    $qselect = "SELECT hID, uID FROM " . "`" . DBN . "`.`houseuser` WHERE hID = " . $keyhouseID . " AND uID = " . $_SESSION['logID'] . " ";
+
+//                    trace($qselect);
+
                     $res = $mysqli->query($qselect);
 
-                    trace($res);
+//                    trace($res);
 
-                    if ($res->num_rows === 1) {                     
+                    if ($res->num_rows === 1) {
                         // House is already added as the user'sfavourite
-                        $failMsg = "House already added as your Favourite";                        
+                        $failMsg = "House already added as your Favourite. ". '<a href = "viewHouses.php">'. "Click here to visit Admin Pages". '</a>';
                     }//if
-                    else //house is not already added a a favourite
-                    {
-                            //Insert into database only if it does not exist
-                            $qinsert = " INSERT INTO "
-                                    . "`" . DBN . "`.`houseuser`(`hID`, `uID`) 
+                    else {
+                        //house is not already added a a favourite
+                        //Insert into database only if it does not exist
+                        $qinsert = " INSERT INTO "
+                                . "`" . DBN . "`.`houseuser`(`hID`, `uID`) 
                                      VALUES (" . $keyhouseID . "," . $_SESSION['logID'] . ")"
-                     ;
+                        ;
+                        trace($qinsert);
+                        $eRes = $mysqli->query($qinsert);
 
-                            trace($qinsert);
-                            $eRes = $mysqli->query($qinsert);
-
-                            if ($mysqli->affected_rows === 1) {
-                                $successMsg = "House added as your Favourite";
-                            } else {
-                                $failMsg = "Could not add House as favourite";
-                            } ### update check
-
-        //                    header('location:' . ROOT . '' . $page . '');
-                    } 
+                        if ($mysqli->affected_rows === 1) {
+                            $successMsg = "House added as your Favourite". '<a href = "viewHouses.php">'. "Click here to visit Admin Pages". '</a>';
+                        } else {
+                            $failMsg = "Could not add House as favourite". '<a href = "viewHouses.php">'. "Click here to visit Admin Pages". '</a>';
+                        } ### update check
+                        //                    header('location:' . ROOT . '' . $page . '');
+                    }//else
                 }//if
             }//else
-        } 
-        
+        }//if ($res->num_rows === 1)
         else {
             // user is not allowed
-            $failMsg = "Could not log in, please try again.";
-        } #### select check
+            $failMsg = "User not found. Could not log in, please try again.";
+        } //else
     } //if (isset($_POST['login']))
 } // dbok
 ?>
@@ -131,7 +130,8 @@ if (isset($dbok) && $dbok) {
 </header>
 </div><!--/wrapper--> 
 <main>
-    <section class="mainBody">           
+    <section class="mainBody"> 
+
         <div class="contain">
             <section class="signinpage">                                  
                 <div class="signin"><!--result product-->
@@ -151,12 +151,13 @@ if (isset($dbok) && $dbok) {
                             </div><!-- submit Button --> 
                         </div>  <!--/signin-->   
                     </form>
-                    <!-- ====================  FEEDBACK START =========-->
-                    <?php include("../includes/feedback.php"); ?>
-                <!-- ====================  FEEDBACK END ===========-->
                 </div>
             </section><!--/signinpage-->
         </div><!--/container-->
+        <!-- ====================  FEEDBACK START =========-->
+        <?php include("../includes/feedback.php"); ?>
+        <!-- ====================  FEEDBACK END ===========-->
+
     </section><!--/ mainBody-->
 </main>
 

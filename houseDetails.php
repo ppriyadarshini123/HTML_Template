@@ -14,19 +14,18 @@ if ($dbok) {
 //    trace($keyID);
     $q = "        
                SELECT H.`hID`, H.`rsID`, H.`housenumber`, H.`streetname`, H.`city`, H.`postcode`, H.`details`, H.`image`, H.`floorplan`, H.`price`, HU.`uID`, U.`email`, U.`uName`
-FROM `house` H
-LEFT JOIN `houseuser` HU
-ON H.`hID` = HU.`hID`
-LEFT JOIN `user` U
-ON HU.`uID` = U.`uID`
-LEFT JOIN `userroles` UR
-ON U.`uID` = UR.`urID`
-WHERE     
-                     H.`hID` = '$keyID' AND UR.`urRole` = 'Property Dealer' LIMIT 1 
-               
+                FROM `house` H
+                LEFT JOIN `houseuser` HU
+                ON H.`hID` = HU.`hID`
+                LEFT JOIN `user` U
+                ON HU.`uID` = U.`uID`
+                LEFT JOIN `userroles` UR
+                ON U.`rID` = UR.`urID`
+                WHERE     
+                     H.`hID` = '$keyID' AND UR.`urRole` = 'Property Dealer' LIMIT 1                
         ";
 
-    trace($q);
+//    trace($q);
     $res = $mysqli->query($q);
 //    trace($res);
     $house = $res->fetch_assoc();
@@ -38,6 +37,7 @@ WHERE
 //   THIS IS THE BEGINNING OF THE MARKUP
 include("includes/top.php");
 include("includes/header.php");
+include("includes/topNav.php");
 ?>
 </div><!--/topHeader-->
 </header>

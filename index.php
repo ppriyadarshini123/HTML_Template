@@ -14,10 +14,10 @@ if ($dbok) {
     $keyMin = isset($_GET['min']) ? $_GET['min'] : '0';
     $keyMax = isset($_GET['max']) ? $_GET['max'] : '0';
 
-    trace($keySaleRent);
-    trace($keyCityPostCode);
-    trace($keyMin);
-    trace($keyMax);
+//    trace($keySaleRent);
+//    trace($keyCityPostCode);
+//    trace($keyMin);
+//    trace($keyMax);
     /*
       mysql wildcards:
      * => any value
@@ -35,7 +35,7 @@ if ($dbok) {
 				LEFT JOIN `user` U
 					ON HU.`uID` = U.`uID`
 				LEFT JOIN `userroles` UR
-					ON U.`uID` = UR.`urID`                    
+					ON U.`rID` = UR.`urID`                    
                 WHERE     
                     H.rsID = '$keySaleRent' AND UR.`urRole` = 'Property Dealer'
                     AND H.`city` LIKE '%$keyCityPostCode%'  
@@ -46,9 +46,9 @@ if ($dbok) {
                     
         ";
 
-   trace($q);
+//   trace($q);
     $res = $mysqli->query($q);
-   trace($res);
+//   trace($res);
 
     if ($res->num_rows > 0) {
         $houses = [];
@@ -67,6 +67,7 @@ if ($dbok) {
 //   THIS IS THE BEGINNING OF THE MARKUP
 include("includes/top.php");
 include("includes/header.php");
+include("includes/topNav.php");
 include("includes/banner.php");
 ?>
 </div><!--/topHeader-->

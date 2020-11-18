@@ -2,61 +2,100 @@
 /**
  *
  * PHP course project
- * url: /signin.php
+ * url: /viewHouses.php
  */
 include("../includes/utilities.php");
+include("../includes/auth.php");
 
 //   THIS IS THE BEGINNING OF THE MARKUP
 include("../includes/top.php");
 include("../includes/header.php");
+include("../includes/signoutNav.php");
 include("../includes/bottomNav.php");
 
 
-
-
-echo $logID;
-if ($dbok) {
+if (isset($dbok) && $dbok) {
     //Check User: If he is admin-display all houses in database
-                       //property dealer - display only his houses, added as favourite
-                       // customer - display only his houses, added as favourite
+    //property dealer - display only his houses, added as favourite
+    // customer - display only his houses, added as favourite
+
+    $qCheckUser = "SELECT UR.urRole, U.uID "
+            . " FROM `user` U "
+            . "LEFT JOIN `userroles` UR "
+            . "ON U.`rID` = UR.`urID`"
+            . " WHERE U.`uID` = '" . $_SESSION['logID'] . "'";
+
+    trace($qCheckUser);
+    if ($res = $mysqli -> query($qCheckUser)) {
     
+    while ($row = $res -> fetch_row()) {
     
-    
-    //Display Houses
-    $qSelectHouses = "SELECT H.`hID`, H.`rsID`, H.`housenumber`, H.`streetname`,
-                        H.`city`, H.`postcode`, H.`details`, H.`image`, H. `price`,
-                        HU.`uID` 
-                        FROM `houseuser` HU
-                        LEFT JOIN `house` H
-                        ON H.`hID` = HU.`hID`                                            
+         //If he is admin-display all houses in database
+    if ($row[0] == 'Admin') {
+        
+         $qSelectHouses = "SELECT *                    
+                        FROM `house` H  
+                        ";
+
+    trace($qSelectHouses);
+    $res = $mysqli->query($qSelectHouses);
+    trace($res);
+
+        if ($res->num_rows > 0) {
+            $houses = [];
+
+            while ($row = $res->fetch_assoc()) {
+                array_push($houses, $row);
+            } // while
+         trace($houses);
+        } else {
+            $failMsg = "Could not find house or something went wrong";
+        } //else
+        
+    } 
+    else {
+        //Display Houses for PROPERTY DEALER and CUSTOMER
+        //property dealer - display only his houses, added as favourite
+         // customer - display only his houses, added as favourite
+        $qSelectHouses = "SELECT H.`hID`, H.`rsID`, H.`housenumber`, H.`streetname`,
+                        H.`city`, H.`postcode`, H.`details`, H.`image`, H. `price`
+                    
+                        FROM `house` H                        
+                        LEFT JOIN  `houseuser` HU
+                        ON H.`hID` = HU.`hID`                       
+                        
                         WHERE HU.`uID` = '" . $_SESSION['logID'] . "'";
 
     trace($qSelectHouses);
     $res = $mysqli->query($qSelectHouses);
     trace($res);
 
-    if ($res->num_rows > 0) {
-        $houses = [];
+        if ($res->num_rows > 0) {
+            $houses = [];
 
-        while ($row = $res->fetch_assoc()) {
-            array_push($houses, $row);
-        } // while
+            while ($row = $res->fetch_assoc()) {
+                array_push($houses, $row);
+            } // while
         trace($houses);
-    } else {
-         $failMsg = "Could not find house or something went wrong";
-    } //else
-    
+        } else {
+            $failMsg = "Could not find house or something went wrong";
+        } //else
+    }//else
+              
+  }//while ($row = $res -> fetch_row())
+
+}//if ($res = $mysqli -> query($qCheckUser))
+
+   
     
     //Edit House
-    
-    
+   
+
+
+
     //Delete House
-    
-    
-    
 }//$dbok
-else
-{
+else {
     $failMsg = "User not logged in";
 }//else
 ?>
@@ -70,11 +109,13 @@ else
                 <div class="headingCenter">
                     <h1>View Houses</h1>
                 </div><!--align heading-->
-                 <!-- ====================  FEEDBACK START =========-->
-                 <?php include("../includes/feedback.php"); ?>
+                <!-- ====================  FEEDBACK START =========-->
+<?php include("../includes/feedback.php"); ?>
                 <!-- ====================  FEEDBACK END ===========-->
                 <div>
-                    <h2><?php if (isset($_SESSION['logNAME'])) {echo "Welcome".$_SESSION['logNAME'];} ?></h2>
+                    <h2><?php if (isset($_SESSION['logNAME'])) {
+    echo " Welcome " . $_SESSION['logNAME'];
+} ?></h2>
                 </div>
                 <div class="resHouseTitle">
                     <div>
@@ -84,6 +125,12 @@ else
                         <p >House Details</p> 
                     </div><!--/Phone number--> 
                 </div>  <!--/resUser-->
+                
+                <?php
+                            if (isset($houses) && isset($dbok) && $dbok) {
+                                foreach ($houses as $house) {
+                                    ?>
+                
                 <div class="resHouse flexCont"><!--result house-->
                     <picture>
                         <source media="(max-width: 359px)" srcset="../build/imgs/house-359x300.png">
@@ -111,7 +158,12 @@ else
                         </div><!--/alignBtn-->
 
                     </div><!--/resStreetName-->
-                </div>  <!--/resHouse-->             
+                </div>  <!--/resHouse-->  
+                
+                 <?php
+    } // foreach
+} // if $houses
+?>
             </section><!--/searchResults-->
         </div><!--/mainBody contain-->
     </section><!--/ mainBody-->

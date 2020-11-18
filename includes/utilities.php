@@ -59,33 +59,19 @@ function trace($obj) {
 //end trace
 
 
-/**
- *	@name       displayMsg
- *	@desc       this foo will feedback messaging
- * 	@param 	    STRING  	  $msg	  the message to display
- * 	@return 	  STRING      $type	  [s=> success, f=> fail]
- */
-function displayMsg($msg, $type){
-  global $successMsg;
-  global $failMsg;
-  if(strtolower($type) === 's'){
-    // success msg
-    if(isset($successMsg)){
-      $successMsg .= "<p>$msg</p>";
-    } else {
-      $successMsg = "<p>$msg</p>";
-    }
-  }// s
 
-  if(strtolower($type) === 'f'){
-    // fail msg
-    if(isset($failMsg)){
-      $failMsg .= "<p>$msg</p>";
-    } else {
-      $failMsg = "<p>$msg</p>";
-    }
-  }// f
-}//displayMsg
+/**
+ *	@name       is_logged_in
+ *	@desc       this foo will detect if user is currently logged in
+ *  @return     boolean
+ */
+function is_logged_in(){
+  if(isset($_SESSION['logID'])) {
+    return true;
+  } else {
+    return false;
+  }
+}//is_logged_in
 
 
 /**
