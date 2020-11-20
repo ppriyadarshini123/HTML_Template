@@ -24,29 +24,21 @@ if (isset($dbok) && $dbok && !is_logged_in()) {
         $logEmail = $_POST['email'];
         $logPsw = $_POST['password'];
 
-        $q = "
-        SELECT
-            * 
-        FROM
-            `" . DBN . "`.`user`
-        WHERE
-            `user`.`email` = '$logEmail' 
-        AND         
-            `user`.`pwd` = '$logPsw'      
-      ";
+        $q = 
+        "SELECT * FROM `user` U LEFT JOIN `userroles` UR ON U.`rID` = UR.`urID`". 
+        " WHERE U.`email` = '". $logEmail . "' AND U.`pwd` = '" . $logPsw."'";
 
-//        echo $q;
+        echo $q;
 
         $res = $mysqli->query($q);
 
-//        trace($res);
+        trace($res);
 
         if ($res->num_rows === 1) {
             // user is allowed
             $user = $res->fetch_assoc();
-            // trace($user);
+             trace($user);
 
-//            trace($user);
             /**
              *  we can store persistent data
              * 1) on the client using $_COOKIE -> do not use for sensitive data
@@ -70,12 +62,17 @@ if (isset($dbok) && $dbok && !is_logged_in()) {
             // starting  session
             startSessionOnce();
             // storing user name and id in $_SESSION
-            $_SESSION['logID'] = $user['uID'];
-            $_SESSION['logNAME'] = $user['uName'];
+            $_SESSION["logID"] = $user['uID'];
+            $_SESSION["logNAME"] = $user['uName'];         
+           
+                           
+            //Check if user is Admin
+           if($user['urRole']== "Admin") {$_SESSION["IsAdmin"] = "1";}
+            else {$_SESSION["IsAdmin"] = "0";}
 
             // redirecting user to viewHouses.php after logging in
-            if (!isset($_GET['page']))
-                header('location:' . ROOT . 'admin/viewHouses.php');
+            if (!isset($_GET['page'])){
+            header('location:' . ROOT . 'admin/viewHouses.php');}
             else {
                 //add to favourites
                 if (isset($_GET['h_id']) && isset($_GET['page'])) {

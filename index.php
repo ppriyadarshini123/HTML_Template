@@ -46,7 +46,7 @@ if ($dbok) {
                     
         ";
 
-   trace($q);
+//   trace($q);
     $res = $mysqli->query($q);
 //   trace($res);
 
