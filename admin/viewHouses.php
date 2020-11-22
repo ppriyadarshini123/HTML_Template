@@ -70,60 +70,31 @@ if (isset($dbok) && $dbok && !isset($_GET['h_id'])) {
         } //else
     }//else   
 }//if
-//EDIT & DELETE MODE
+//DELETE MODE
 if ($dbok && isset($_GET['h_id']) && isset($_SESSION['IsAdmin']) && isset($_SESSION['logID'])) {
 
     $hID = $_GET['h_id'];
-    if ($_SESSION['IsAdmin'] == "1" && isset($_POST['edit'])) {
-
-        if ($_POST['edit']) {
-
-            //Edit/Update House
-            //update mode: for Admin ONLY: Update values in database 
-            $rentsale = $_GET['rentsale'];
-            if ($rentsale = "Rent") $rs = 1;
-            else $rs = 2;
-            $city = $_GET['city'];
-            $details = $_GET['details'];
-            $housenumber = $_GET['housenumber'];
-            $postcode = $_GET['postcode'];
-            $price = $_GET['price'];
-            $streetname = $_GET['streetname'];
-            
-            
-            $qUPDATE = "UPDATE `house` SET city = " . $city . ", rsID = ". $rs .", details = " . $details . ", housenumber = " . $housenumber . ", postcode= " . $postcode . ", price$= " . $price . ", streetname= " . $streetname . " where `hID` = '" . $hID . "'";
-
-            trace($qUPDATE);
-            $dRes = $mysqli->query($qUPDATE);
-
-            if ($mysqli->affected_rows === 1) {
-                $successMsg = "House successfully updated.";
-            } else {
-                $failMsg = "Could not update house or house already deleted.";
-            } #### delete check    
-        }//if ($_POST['edit']) {
-    }//if
-    else {
+    if ($_SESSION['IsAdmin'] == "1") {
         //Delete House
         //delete mode: for Admin: Delete house from database
         //             for property dealer and customer: Remove as favourite
         //Remove as favourite for customer and property dealer. i.e. remove house from houseuser table for userid
-        if ($_SESSION['IsAdmin'] == "1") {
-            //ADMIN MODE - Delete house from database        
-            $qDELETE = "DELETE FROM `house` where `hID` = '" . $hID . "'";
-        } else {
-            //For customer and property dealer - Remove as favourite        
-            $qDELETE = "DELETE FROM `houseuser` WHERE hID = " . $hID . " AND uID= " . $logID;
-        }//else
-        trace($qDELETE);
-        $dRes = $mysqli->query($qDELETE);
-
-        if ($mysqli->affected_rows === 1) {
-            $successMsg = "House successfully deleted.";
-        } else {
-            $failMsg = "Could not delete house or house already deleted.";
-        } #### delete check
+        //ADMIN MODE - Delete house from database        
+        $qDELETE = "DELETE FROM `house` where `hID` = '" . $hID . "'";
+    } else {
+        //For customer and property dealer - Remove as favourite        
+        $qDELETE = "DELETE FROM `houseuser` WHERE hID = " . $hID . " AND uID= " . $logID;
     }//else
+
+    trace($qDELETE);
+    $dRes = $mysqli->query($qDELETE);
+
+    if ($mysqli->affected_rows === 1) {
+        $successMsg = "House successfully deleted.";
+    } else {
+        $failMsg = "Could not delete house or house already deleted.";
+    } #### delete check
+
 }//if
 ?>
 </div><!--/topHeader-->
@@ -157,7 +128,7 @@ if (isset($_SESSION['logNAME'])) {
                 </div>  <!--/resUser-->
 
                 <?php
-//start the loop
+                //start the loop
                 if (isset($houses) && isset($dbok) && $dbok) {
                     foreach ($houses as $house) {
                         ?>
@@ -199,23 +170,15 @@ if (isset($_SESSION['logNAME'])) {
                             </picture>
                             <div class="resStreetName">
                                 <div>
-                                    <p class="hRentSale">House for <?php
-                                    if(isset($_POST['edit'])){
-                                       ?>                                           
-                                        <input value="0" name="rentsale" type="text"> 
-                                           <?php                                         
-                                    }
-                                    else {
-                                         if (isset($house['rsID'])) {
-                            if ($house['rsID'] == 2)
-                                echo 'Sale';
-                            else
-                                echo 'Rent';
-                        }
-                                    }
-                                    
-                       
-                        ?></p>
+                                    <p class="hRentSale">House for 
+                                        <?php
+                                        if (isset($house['rsID'])) {
+                                            if ($house['rsID'] == 2)
+                                                echo 'Sale';
+                                            else
+                                                echo 'Rent';
+                                        }
+                                        ?></p>
                                 </div><!--house for rent/sale-->
                                 <div>
                                     <p class="hPrice">Price: £ <?php
@@ -223,7 +186,7 @@ if (isset($_SESSION['logNAME'])) {
                                     echo $house['price'];
                                 } else
                                     echo '--';
-                        ?></p>
+                                        ?></p>
                                 </div><!--price-->
                                 <div>                                   
                                     <p class="hStreet"><?php
@@ -231,7 +194,7 @@ if (isset($_SESSION['logNAME'])) {
                                     echo "{$house['housenumber']},{$house['streetname']},{$house['city']},{$house['postcode']}";
                                 } else
                                     echo '--';
-                        ?></p> 
+                                        ?></p> 
                                 </div><!--/Street Name-->  
                                 <div>                                   
                                     <p class="hDetails"><?php
@@ -239,23 +202,21 @@ if (isset($_SESSION['logNAME'])) {
                                     echo $house['details'];
                                 } else
                                     echo '--';
-                        ?></p>
+                                        ?></p>
                                 </div><!--/Details-->
 
                                 <?php
-                                if (isset($isAdmin) && $isAdmin) {
+                                if (isset($_SESSION["IsAdmin"]) && $_SESSION["IsAdmin"] = "1") {
                                     ?>
-                                    <div class="alignBtn"> 
-                                        <input type="submit" name="edit" class="btnSubmit" value="Edit House">
+                                    <div class="alignBtn">                                        
+                                        <a href="<?php echo ROOT; ?>admin/addHouse.php?h_id=<?php echo $house['hID']; ?>&editmode=1" class="btnSubmit">Edit House</a>
                                     </div><!--/alignBtn-->
 
                                     <div class="alignBtn"> 
                                         <a href="<?php echo ROOT; ?>admin/viewHouses.php?h_id=<?php echo $house['hID']; ?>&isAdmin=<?php $isAdmin ?>" class="btnSubmit">Delete House</a>
                                     </div><!--/alignBtn-->
                                 <?php } else { ?>
-                                    <div class="alignBtn"> 
-                                        <input type="submit" name="edit" class="btnSubmit" value="Edit House">
-                                    </div><!--/alignBtn-->
+
                                     <div class="alignBtn">                            
                                         <!--                                    <button class="btnSubmit" name="submit">Add to Favourites</button>-->
                                         <a href="<?php echo ROOT; ?>admin/viewHouses.php?h_id=<?php echo $house['hID']; ?>&isAdmin=<?php $isAdmin ?>" class="btnSubmit">Remove House as Favourite</a>
