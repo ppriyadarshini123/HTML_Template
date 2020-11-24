@@ -22,7 +22,7 @@ if (isset($dbok) && $dbok && !isset($_GET['h_id'])) {
     if ($_SESSION['IsAdmin'] == "1") {
 
         //If he is admin-display all houses in database               
-        $qSelectHouses = "SELECT *                    
+        $qSelectHouses = "SELECT  *                    
                         FROM `house` H  
                         ";
 

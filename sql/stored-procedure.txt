@@ -1,0 +1,49 @@
+
+CREATE PROCEDURE add_house @city varchar, 
+ 			   @rsID smallint,
+                           @details text,
+                           @floorplan varchar,
+                           @image varchar,
+                           @housenumber int,
+                           @postcode varchar,
+                           @price int,
+                           @streetname varchar,
+                           @uID int
+AS
+set xact_abort on
+BEGIN TRANSACTION
+SAVE TRANSACTION mySavePoint
+SET NOCOUNT ON
+
+BEGIN TRY
+INSERT INTO home_search.house(city,rsID,details,floorplan,image,housenumber,postcode,price,streetname) VALUES (@city,@rsID,@details,@floorplan,@image,@housenumber,@postcode,@price,@streetname);
+
+SET @hid =  SCOPE_IDENTITY();
+
+INSERT INTO `houseuser`(`hID`, `uID`)
+VALUES ('@hid','@uid');
+
+COMMIT TRANSACTION
+
+END TRY
+
+BEGIN CATCH
+
+-- Rollback the transaction if there were any errors
+IF @@ERROR <> 0
+ BEGIN
+    -- Rollback the transaction
+    ROLLBACK TRANSACTION mySavePoint;
+
+    -- Raise an error and return
+    RAISERROR ('Error in inserting house', 16, 1)
+    RETURN
+ END
+END CATCH
+
+END;
+GO
+
+
+
+
