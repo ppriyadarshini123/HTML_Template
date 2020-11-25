@@ -11,7 +11,8 @@ include("../includes/auth.php");
 include("../includes/top.php");
 include("../includes/header.php");
 include("../includes/signoutNav.php");
-include("../includes/bottomNav.php");
+
+if ($_SESSION['IsAdmin'] == "1") include("../includes/bottomNav.php");
 
 //SELECT QUERY
 if (isset($dbok) && $dbok && !isset($_GET['h_id'])) {
@@ -70,17 +71,21 @@ if (isset($dbok) && $dbok && !isset($_GET['h_id'])) {
         } //else
     }//else   
 }//if
+//
 //DELETE MODE
 if ($dbok && isset($_GET['h_id']) && isset($_SESSION['IsAdmin']) && isset($_SESSION['logID'])) {
 
     $hID = $_GET['h_id'];
+    
     if ($_SESSION['IsAdmin'] == "1") {
+        
         //Delete House
         //delete mode: for Admin: Delete house from database
         //             for property dealer and customer: Remove as favourite
         //Remove as favourite for customer and property dealer. i.e. remove house from houseuser table for userid
         //ADMIN MODE - Delete house from database        
         $qDELETE = "DELETE FROM `house` where `hID` = '" . $hID . "'";
+        //Also delete house from houseuser table
     } else {
         //For customer and property dealer - Remove as favourite        
         $qDELETE = "DELETE FROM `houseuser` WHERE hID = " . $hID . " AND uID= " . $logID;

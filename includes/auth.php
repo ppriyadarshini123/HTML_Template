@@ -23,6 +23,7 @@ if(isset($_GET['log']) && $_GET['log'] === 'out') {
   // session_destroy();
   $_SESSION['logID']    = null;
   $_SESSION['logNAME']  = null;
+  $_SESSION['IsAdmin'] = null;
   // redirecting to login page, out of restricted area
   header('location:' . ROOT . "index.php");
 } // log out
