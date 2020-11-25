@@ -86,7 +86,7 @@ if ($dbok && isset($_GET['h_id']) && isset($_SESSION['IsAdmin']) && isset($_SESS
         $qDELETE = "DELETE FROM `houseuser` WHERE hID = " . $hID . " AND uID= " . $logID;
     }//else
 
-    trace($qDELETE);
+    //trace($qDELETE);
     $dRes = $mysqli->query($qDELETE);
 
     if ($mysqli->affected_rows === 1) {

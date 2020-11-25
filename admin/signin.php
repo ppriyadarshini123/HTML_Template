@@ -28,16 +28,16 @@ if (isset($dbok) && $dbok && !is_logged_in()) {
         "SELECT * FROM `user` U LEFT JOIN `userroles` UR ON U.`rID` = UR.`urID`". 
         " WHERE U.`email` = '". $logEmail . "' AND U.`pwd` = '" . $logPsw."'";
 
-        echo $q;
+        //echo $q;
 
         $res = $mysqli->query($q);
 
-        trace($res);
+        //trace($res);
 
         if ($res->num_rows === 1) {
             // user is allowed
             $user = $res->fetch_assoc();
-             trace($user);
+             //trace($user);
 
             /**
              *  we can store persistent data
@@ -101,7 +101,7 @@ if (isset($dbok) && $dbok && !is_logged_in()) {
                                 . "`" . DBN . "`.`houseuser`(`hID`, `uID`) 
                                      VALUES (" . $keyhouseID . "," . $_SESSION['logID'] . ")"
                         ;
-                        trace($qinsert);
+                        //trace($qinsert);
                         $eRes = $mysqli->query($qinsert);
 
                         if ($mysqli->affected_rows === 1) {
