@@ -12,47 +12,23 @@ include("../includes/top.php");
 include("../includes/header.php");
 include("../includes/bottomNav.php");
 
-
-//SELECT MODE
-//IF the admin wants to edit the user, he should have a u_id and IsAdmin should be 1
-if (isset($dbok) && $dbok && isset($_GET['u_id'])) {
-
-//Only Admin can view details of house
-    if ($_SESSION['IsAdmin'] == "1") {
-//Display Data from database
-//If he is admin-display all houses in database               
-        $qSelectUsers = " SELECT DISTINCT *
-                FROM `user` U                
-                LEFT JOIN `userroles` UR
-                ON U.`rID` = UR.`urID`
-                WHERE     
-                     U.`uID` = " . $_GET['u_id'] . " LIMIT 1";
-//trace($qSelectHouses);
-        $res = $mysqli->query($qSelectUsers);
-//trace($res);
-        $user = $res->fetch_assoc();
-//trace($houses);
-//    trace($q);
-//Save the details in database
-    }//if
-}//if
 //UPDATE MODE
 //Update User values in Database
 if (isset($_POST['submit']) && isset($_GET['u_id'])) {
 
     if ($_SESSION['IsAdmin'] == "1") {
-//Check if $uID exists for editing
+        
+        //Check if $uID exists for editing
         $uID = $_GET['u_id'];
-
 
         if (isset($_POST['uEmail'])) {
             $email = trim($_POST['uEmail']);
         }//if
-        if (isset($_POST['uRoleID'])) {
-            $role = trim($_POST['uRoleID']);
+        if (isset($_POST['uRole'])) {
+            $role = trim($_POST['uRole']);
         }//if
-        if (isset($_POST['uPassword'])) {
-            $password = trim($_POST['uPassword']);
+        if (isset($_POST['uPsw'])) {
+            $password = trim($_POST['uPsw']);
         }//if
         if (isset($_POST['uName'])) {
             $name = $_POST['uName'];
@@ -65,9 +41,10 @@ if (isset($_POST['submit']) && isset($_GET['u_id'])) {
         $qUpdateUser = "UPDATE `user` U "
                 . "LEFT JOIN `userroles` UR "
                 . "ON U.`rID` = UR.`urID` "
-                . "SET `email`='" . $email . "', `phone`= '" . $phonenumber . "', `rID`= '" . $role . "',`uName`='" . $name . "',`pwd`='" . $pwd . "'";
+                . "SET `email`='" . $email . "', `phone`= '" . $phonenumber . "', `rID`= '" . $role . "',`uName`='" . $name . "',`pwd`='" . $password . "'"
+                ." WHERE uID = ". $uID;
 
-//trace($qUpdateUser);
+       // trace($qUpdateUser);
 
         $dRes = $mysqli->query($qUpdateUser);
 
@@ -79,75 +56,85 @@ if (isset($_POST['submit']) && isset($_GET['u_id'])) {
         } //else  
     }//if
 }//if
-//INSERT NEW HOUSE
-if (isset($_POST['submit']) && !isset($_GET['h_id'])) {
+//SELECT IN EDIT MODE
+//IF the admin wants to edit the user, he should have a u_id and IsAdmin should be 1
+if (isset($dbok) && $dbok && isset($_GET['u_id'])) {
 
-    //only admin can insert new house
+    //Only Admin can view details of house
     if ($_SESSION['IsAdmin'] == "1") {
-        if (isset($_POST['hRentSale'])) {
 
-            $rentsale = trim($_POST['hRentSale']);
-            if ($rentsale == "Rent") {
-                $rs = 1;
-            } else {
-                $rs = 2;
-            }//else
-        }//if
-
-        if (isset($_POST['hHouseNumber'])) {
-            $housenumber = trim($_POST['hHouseNumber']);
-        }//if
-        if (isset($_POST['hCity'])) {
-            $city = trim($_POST['hCity']);
-        }//if
-        if (isset($_POST['hDetails'])) {
-            $details = trim($_POST['hDetails']);
-        }//if
-        if (isset($_POST['hPropertyDealer'])) {
-            $uid = $_POST['hPropertyDealer'];
-        }//if
-        if (isset($_POST['hImage'])) {
-            $image = trim($_POST['hImage']);
-        }//if
-        if (isset($_POST['hFloorPlan'])) {
-            $floorplan = trim($_POST['hFloorPlan']);
-        }//if
-        if (isset($_POST['hPostCode'])) {
-            $postcode = trim($_POST['hPostCode']);
-        }//if
-        if (isset($_POST['hPrice'])) {
-            $price = trim($_POST['hPrice']);
-        }//if
-        if (isset($_POST['hStreetname'])) {
-            $streetname = trim($_POST['hStreetname']);
-        }//if
+        //Display Data from database            
+        $qSelectUsers = " SELECT DISTINCT *
+                FROM `user` U                
+                LEFT JOIN `userroles` UR
+                ON U.`rID` = UR.`urID`
+                WHERE     
+                     U.`uID` = " . $_GET['u_id'] . " LIMIT 1";
+        //trace($qSelectUsers);
+        $res = $mysqli->query($qSelectUsers);
+        //trace($res);
+        $user = $res->fetch_assoc();
+        //trace($user);
+    }//if
+}//if
 
 
+//INSERT NEW HOUSE
+if (isset($_POST['submit']) && !(isset($_GET['u_id']))) {
+
+    if ($_SESSION['IsAdmin'] == "1") {
+        if (isset($_POST['uEmail'])) {
+            $email = trim($_POST['uEmail']);
+        }//if
+        if (isset($_POST['uRole'])) {
+            $rID = trim($_POST['uRole']);
+        }//if
+        if (isset($_POST['uPsw'])) {
+            $password = trim($_POST['uPsw']);
+        }//if
+        if (isset($_POST['uName'])) {
+            $name = $_POST['uName'];
+        }//if
+        if (isset($_POST['uPhoneNumber'])) {
+            $phonenumber = trim($_POST['uPhoneNumber']);
+        }//if
+        
+         if (isset($_POST['uHouseAssigned'])) {
+            $houseassigned = trim($_POST['uHouseAssigned']);
+        }//if
+        
         try {
             /* Start transaction */
             $mysqli->begin_transaction();
 
-            //Update the edited house details
-            $qInsertHouse = "INSERT INTO `house`"
-                    . "(`city`, `rsID`, `details`, `floorplan`, `image`, `housenumber`, `postcode`, `price`, `streetname`)"
-                    . " VALUES ('" . $city . "','" . $rs . "','" . $details . "','" . $floorplan . "','" . $image . "','" . $housenumber . "','" . $postcode . "','" . $price . "','" . $streetname . "');";
+            //Insert new user details
+            $qInsertUser = "INSERT INTO `user`"
+                    . "(`email`, `phone`, `pwd`, `rID`, `uName`)"
+                    . " VALUES ('" . $email . "','" . $phonenumber . "','" . $password . "','" . $rID . "','" . $name ."');";
 
-            //trace($qInsertHouse);
+            trace($qInsertUser);
 
-            $dRes = $mysqli->query($qInsertHouse);
+            $dRes = $mysqli->query($qInsertUser);
 
             if ($mysqli->affected_rows === 1) {
                 //Get the hID from the database
-                $h_id = $mysqli->insert_id;
+                $uID = $mysqli->insert_id;
                 
+                //Update the edited house details
+                $qInsertHouseUser = "INSERT INTO `houseuser`"
+                    . "(`hID`, `uID`)"
+                    . " VALUES ('" . $houseassigned . "','" . $uID . "');";
+                
+                $dRes2 = $mysqli->query($qInsertHouseUser);
+
                 if ($mysqli->affected_rows === 1) {
                     $successMsg = "User successfully added.";
                 } else {
                     $failMsg = "Could not add User.";
-                } //else 
+                } //else             
 
                 $mysqli->commit();
-            }//try
+                }//if           
         } catch (mysqli_sql_exception $exception) {
             $mysqli->rollback();
 
@@ -156,8 +143,6 @@ if (isset($_POST['submit']) && !isset($_GET['h_id'])) {
     }//if
 }// if
 ?>
-
-
 </div><!--/topHeader-->
 </header>
 </div><!--/wrapper-->
@@ -178,60 +163,146 @@ if (isset($_POST['submit']) && !isset($_GET['h_id'])) {
                             ?></h1>
                     </div><!--align heading-->
 
-<?php
+                    <?php
 //start the loop
-if (isset($dbok) && $dbok) {
-    ?>
+                    if (isset($dbok) && $dbok) {
+                        ?>
                         <!-- ====================  FEEDBACK START =========-->
                         <?php include("../includes/feedback.php"); ?>
                         <!-- ====================  FEEDBACK END ===========-->
                         <div class="form">
-                            <div class="editAddHouseAlign">                       
+                            <div class="editAddHouseAlign"> 
+                                <div class="align">
+                                    <label for="uName">Name :</label>
+                                    <input class="formField" type="text" id="uName" name="uName" value="<?php
+                                if (isset($user['uName']) && isset($_GET['u_id']) && !isset($_POST['submit'])) {
+                                    echo trim($user['uName']);
+                                } else {
+                                    echo '';
+                                }
+                                            ?>">
+                                </div><!--align name--> 
                                 <div class="align">
                                     <label for="uRole">Role:</label>
-                                    <input list="roles" name="role" value="<?php
-                                                            ?>     >
-                                   
+                                    <div>
+                                        <select id="uRole" name="uRole">
+                                            <!--  <option value='' id='hPropertyDealer'></option>                          -->
+                                            <!--  <option selected="selected" value="-->
+                                            <?php
+                                            //Populate property dealers datalist
+                                            $getRoles = "SELECT * from `userroles`";
+
+                                            $res3 = $mysqli->query($getRoles);
+
+                                            if ($res3->num_rows > 0) {
+                                                $roles = [];
+                                                while ($row3 = $res3->fetch_assoc()) {
+                                                    array_push($roles, $row3);
+                                                } // while 
+                                              //  trace($roles);
+                                            }//if           
+                                            //If edit mode, select the value already in the database, else just populate the datalist with roles
+                                            if (isset($user['urRole']) && isset($_GET['u_id']) && !isset($_POST['submit'])) {
+                                                foreach ($roles as $role) {
+                                                    if ($role['urID'] == $user['rID']) {
+                                                        echo '<option selected=\'selected\' value=\'' . $role['urID'] . '\'>' . $role['urRole'] . '</option>';
+                                                    } else {
+                                                        echo '<option value= \'' . $role['urID'] . '\'>' . $role['urRole'] . '</option>';
+                                                    }//else            
+                                                }//foreach
+                                            }//if
+                                            else {
+                                                foreach ($roles as $role) {
+                                                    echo '<option value= \'' . $role['urID'] . '\'>' . $role['urRole'] . '</option>';
+                                                }//foreach
+                                            }//else
+                                            ?>
+                                        </select>
+                                    </div><!-- input roles -->
                                 </div><!--align role-->
                                 <div class="align">
+                                    <label for="uHouseAssigned">House Assigned :</label>
+                                    <div>
+                                        <!--                                        House will be assigned to a property dealer in the add mode by the admin.
+                                                                                Customer can choose his favourite and it need not be assigned by admin-->
+                                        <select id="uHouseAssigned" name="uHouseAssigned">
+                                            <!--  <option value='' id='hPropertyDealer'></option>                          -->
+                                            <!--  <option selected="selected" value="-->
+                                            <?php
+                                            if (!isset($_GET['u_id'])) {
+                                                //Populate houses datalist
+                                                $getHouses = "SELECT * from `house`";
+
+                                                $res2 = $mysqli->query($getHouses);
+
+                                                if ($res2->num_rows > 0) {
+                                                    $houses = [];
+
+                                                    while ($row = $res2->fetch_assoc()) {
+                                                        array_push($houses, $row);
+                                                    } // while 
+                                                   // trace($houses);
+                                                }//if  
+
+                                                if (!isset($_POST['submit'])) {
+                                                    foreach ($houses as $house) {
+                                                        echo '<option value= \'' . $house['hID'] . '\'>' . $house['housenumber'] . "  " .$house['streetname'] ."  " . $house['postcode'] . '</option>';
+                                                    }//foreach
+                                                }//if
+                                            }//if
+                                            ?>
+                                        </select>
+
+                                    </div><!-- input roles -->
+
+                                </div><!--align house assigned--> 
+                                <div class="align">
+                                    <label for="uPhoneNumber">Phone Number :</label>
+                                    <input class="formField" type="text" id="uPhoneNumber" name="uPhoneNumber" value="<?php
+                                if (isset($user['phone']) && isset($_GET['u_id']) && !isset($_POST['submit'])) {
+                                    echo trim($user['phone']);
+                                } else {
+                                    echo '';
+                                }
+                                            ?>">                                
+                                </div><!--align phone number--> 
+                                <div class="align">
                                     <label for="uEmail">Email :</label>
-                                    <input class="formField" type="text" id="uEmail" name="uEmail" value="">
+                                    <input class="formField" type="text" id="uEmail" name="uEmail"  value="<?php
+                                        if (isset($user['email']) && isset($_GET['u_id']) && !isset($_POST['submit'])) {
+                                            echo $user['email'];
+                                        } else {
+                                            echo '';
+                                        }
+                                            ?>">
                                 </div><!--align email address-->  
                                 <div class="align">
                                     <label for="uPsw">Password :</label>
-                                    <input class="formField" type="text" id="uPsw" name="uPsw" value="">
-                                </div><!--align password--> 
-                                <div class="align">
-                                    <label for="uHouseAssigned">House Assigned :</label>
-                                    <input list="houses" name="house">
-                                    <datalist id="houses">
-                                    </datalist>
-                                </div><!--align password--> 
-                                <div class="align">
-                                    <label for="uName">Name :</label>
-                                    <input class="formField" type="text" id="uName" name="uName" value="">
-                                </div><!--align name--> 
-                                <div class="align">
-                                    <label for="uPhoneNumber">Phone Number :</label>
-                                    <input class="formField" type="text" id="uPhoneNumber" name="uPhoneNumber" value="">                                
-                                </div><!--align phone number-->                       
+                                    <input class="formField" type="text" id="uPsw" name="uPsw" value="<?php
+                                if (isset($user['pwd']) && isset($_GET['u_id']) && !isset($_POST['submit'])) {
+                                    echo trim($user['pwd']);
+                                } else {
+                                    echo '';
+                                }
+                                            ?>">
+                                </div><!--align password-->  
                                 <div class="alignBtn">
-                                    <button type="submit" class="btnSubmit">Submit</button>                                
+                                    <button type="submit" id="submit" name="submit" class="btnSubmit">Submit</button>                                
                                 </div><!--align submit--> 
                             </div><!--/editAddHousealign-->
                         </div><!--/form-->
-                        
-<?php } ?>
-                    </form><!--/editAddHouse-->
-                </section><!--/editAddHouse-->
-            </div><!--/container-->   
-        </section><!--/ mainBody-->
-    </main>
-    <?php include("../includes/footer.php"); ?> 
 
-    <script src="<?php echo ROOT; ?>node_modules/jquery/dist/jquery.js"></script>
-    <script src="<?php echo ROOT; ?>node_modules/enquire.js/dist/enquire.min.js"></script>
-    <script src="<?php echo ROOT; ?>build/js/index.js"></script>
+<?php } ?>
+                </form><!--/editAddHouse-->
+            </section><!--/editAddHouse-->
+        </div><!--/container-->   
+    </section><!--/ mainBody-->
+</main>
+<?php include("../includes/footer.php"); ?> 
+
+<script src="<?php echo ROOT; ?>node_modules/jquery/dist/jquery.js"></script>
+<script src="<?php echo ROOT; ?>node_modules/enquire.js/dist/enquire.min.js"></script>
+<script src="<?php echo ROOT; ?>build/js/index.js"></script>
 <!--/ your JS here-->
 </body>
 </html>

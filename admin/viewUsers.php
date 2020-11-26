@@ -25,7 +25,7 @@ if ($dbok && isset($_GET['u_id']) && isset($_SESSION['IsAdmin'])) {
         //delete mode: for Admin: Delete user from database
         $qDELETE = "DELETE FROM `user` where `uID` = '" . $uID . "'";
 
-        trace($qDELETE);
+        //trace($qDELETE);
         $dRes = $mysqli->query($qDELETE);
 
         if ($mysqli->affected_rows === 1) {
@@ -51,9 +51,9 @@ if (isset($dbok) && $dbok && !isset($_GET['u_id'])) {
                         ON U.`rID` = UR.`urID`  
                         ";
 
-        trace($qSelectUsers);
+        //trace($qSelectUsers);
         $res = $mysqli->query($qSelectUsers);
-        trace($res);
+        //trace($res);
 
         if ($res->num_rows > 0) {
             $users = [];
@@ -130,7 +130,8 @@ if (isset($dbok) && $dbok && !isset($_GET['u_id'])) {
             <?php
             if (isset($_SESSION["IsAdmin"]) && $_SESSION["IsAdmin"] = "1") {
                 ?>
-                                        <div class="alignBtn">                                        
+                                        <div class="alignBtn">   
+                                            
                                             <a href="<?php echo ROOT; ?>admin/addUser.php?u_id=<?php echo $user['uID']; ?>&editmode=1" class="btnSubmit">Edit User</a>
 
                                         </div><!--/alignBtn-->

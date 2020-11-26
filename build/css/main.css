@@ -2119,12 +2119,13 @@ a
     
      input[type=text]
     {
-        width: 7vw;
+        width: 10vw;
+        
     } 
     
     select
     {
-        width: 7vw;
+        width: 16vw;
     }
     
     

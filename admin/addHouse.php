@@ -197,19 +197,19 @@ if (isset($_POST['submit']) && !isset($_GET['h_id'])) {
                 <form method="post" action="#" class="fields" id="updateHouse">
                     <div class="headingCenter">
                         <h1><?php
-if (isset($_GET['editmode']))
-    echo 'Edit House';
-else
-    echo 'Add House';
-?></h1>
+                            if (isset($_GET['editmode']))
+                                echo 'Edit House';
+                            else
+                                echo 'Add House';
+                            ?></h1>
                     </div><!--headingCenter-->
 
-                            <?php
+                    <?php
 //start the loop
-                            if (isset($dbok) && $dbok) {
-                                ?>
+                    if (isset($dbok) && $dbok) {
+                        ?>
                         <!-- ====================  FEEDBACK START =========-->
-                                <?php include("../includes/feedback.php"); ?>
+                        <?php include("../includes/feedback.php"); ?>
                         <!-- ====================  FEEDBACK END ===========-->
                         <div class="form">                       
                             <div class="align">
@@ -217,20 +217,39 @@ else
                                     <label for="hRentSale">Rent/Sale</label>
                                 </div><!--label streetname-->
                                 <div>                                
-                                    <input class="formField" type="text" id="hRentSale" name="hRentSale" value="<?php
-                            if (isset($house['rsID']) && ($_GET['editmode'] == 1) && !isset($_POST['submit'])) {
-//        echo $house['streetname'];
-                                if ($house['rsID'] == 1) {
-                                    echo trim('Rent');
-                                }//if
-                                else {
-                                    echo trim('Sale');
-                                }//else
-                            } else {
-                                echo '';
-                            }//else
-                                ?>     
-                                           ">
+                                    <select id="hRentSale" name="hRentSale">
+                                        <!--  <option value='' id='hPropertyDealer'></option>                          -->
+                                        <!--  <option selected="selected" value="-->
+                                        <?php
+                                        //Populate property dealers datalist
+                                        $getRS = "SELECT * from `rentsale`";
+
+                                        $res3 = $mysqli->query($getRS);
+
+                                        if ($res3->num_rows > 0) {
+                                            $rs = [];
+                                            while ($row3 = $res3->fetch_assoc()) {
+                                                array_push($rs, $row3);
+                                            } // while 
+                                            trace($rs);
+                                        }//if           
+                                        //If edit mode, select the value already in the database, else just populate the datalist with rent/sale
+                                        if (isset($_GET['h_id']) && !isset($_POST['submit'])) {
+                                            foreach ($rs as $r) {
+                                                if ($house['rsID'] == $r['rsID']) {
+                                                    echo '<option selected=\'selected\' value=\'' . $r['rsID'] . '\'>' . $r['rsRentSale'] . '</option>';
+                                                } else {
+                                                    echo '<option value= \'' . $r['rsID'] . '\'>' . $r['rsRentSale'] . '</option>';
+                                                }//else            
+                                            }//foreach
+                                        }//if
+                                        else {
+                                            foreach ($rs as $r) {
+                                                echo '<option value= \'' . $r['rsID'] . '\'>' . $r['rsRentSale'] . '</option>';
+                                            }//foreach
+                                        }//else
+                                        ?>
+                                    </select>
                                 </div><!--input rent sale-->
                             </div><!--align rent sale-->
                             <div class="align">
@@ -239,12 +258,12 @@ else
                                 </div><!-- label house number -->
                                 <div>
                                     <input class="formField" type="text" id="hHouseNumber" name="hHouseNumber" value="<?php
-                                if (isset($house['housenumber']) && ($_GET['editmode'] == 1) && !isset($_POST['submit'])) {
-                                    echo trim($house['housenumber']);
-                                } else {
-                                    echo '';
-                                }
-                                ?>     ">
+                                    if (isset($house['housenumber']) && ($_GET['editmode'] == 1) && !isset($_POST['submit'])) {
+                                        echo trim($house['housenumber']);
+                                    } else {
+                                        echo '';
+                                    }
+                                    ?>     ">
                                 </div><!--input housenumber-->
                             </div><!--align house number--> 
                             <div class="align">
@@ -253,12 +272,12 @@ else
                                 </div><!-- label postcode -->
                                 <div>
                                     <input class="formField" type="text" id="hPostCode" name="hPostCode" value="<?php
-                                if (isset($house['postcode']) && ($_GET['editmode'] == 1) && !isset($_POST['submit'])) {
-                                    echo trim($house['postcode']);
-                                } else {
-                                    echo '';
-                                }//else
-                                ?>     ">
+                                    if (isset($house['postcode']) && ($_GET['editmode'] == 1) && !isset($_POST['submit'])) {
+                                        echo trim($house['postcode']);
+                                    } else {
+                                        echo '';
+                                    }//else
+                                    ?>     ">
                                 </div><!--input postcode-->
                             </div><!--align postcode--> 
                             <div class="align">
@@ -267,12 +286,12 @@ else
                                 </div><!-- label Price -->
                                 <div>
                                     <input class="formField" type="text" id="hPrice" name="hPrice" value="<?php
-                                if (isset($house['price']) && ($_GET['editmode'] == 1) && !isset($_POST['submit'])) {
-                                    echo trim($house['price']);
-                                } else {
-                                    echo '';
-                                }//else
-                                ?>     ">
+                                    if (isset($house['price']) && ($_GET['editmode'] == 1) && !isset($_POST['submit'])) {
+                                        echo trim($house['price']);
+                                    } else {
+                                        echo '';
+                                    }//else
+                                    ?>     ">
                                 </div><!--input housenumber-->
                             </div><!--align price--> 
                             <div class="align">
@@ -281,12 +300,12 @@ else
                                 </div><!--label streetname-->
                                 <div>                                
                                     <input class="formField" type="text" id="hStreetname" name="hStreetname" value="<?php
-                                if (isset($house['streetname']) && ($_GET['editmode'] == 1) && !isset($_POST['submit'])) {
-                                    echo trim($house['streetname']);
-                                } else {
-                                    echo '';
-                                }//else
-                                ?>     
+                                    if (isset($house['streetname']) && ($_GET['editmode'] == 1) && !isset($_POST['submit'])) {
+                                        echo trim($house['streetname']);
+                                    } else {
+                                        echo '';
+                                    }//else
+                                    ?>     
                                            ">
                                 </div><!--input streetname-->
                             </div><!--align streetname-->
@@ -296,12 +315,12 @@ else
                                 </div><!-- label city -->
                                 <div>
                                     <input class="formField" type="text" id="hCity" name="hCity" value="<?php
-                                if (isset($house['city']) && ($_GET['editmode'] == 1) && !isset($_POST['submit'])) {
-                                    echo trim($house['city']);
-                                } else {
-                                    echo '';
-                                }//else
-                                ?>     ">
+                                    if (isset($house['city']) && ($_GET['editmode'] == 1) && !isset($_POST['submit'])) {
+                                        echo trim($house['city']);
+                                    } else {
+                                        echo '';
+                                    }//else
+                                    ?>     ">
                                 </div><!-- input city -->
                             </div><!-- align city -->
                             <div class="align">
@@ -310,12 +329,12 @@ else
                                 </div><!-- label city -->
                                 <div>
                                     <input class="formField" type="text" id="hDetails" name="hDetails" value="<?php
-                                if (isset($house['details']) && ($_GET['editmode'] == 1) && !isset($_POST['submit'])) {
-                                    echo trim($house['details']);
-                                } else {
-                                    echo '';
-                                }//else
-                                ?>     ">
+                                    if (isset($house['details']) && ($_GET['editmode'] == 1) && !isset($_POST['submit'])) {
+                                        echo trim($house['details']);
+                                    } else {
+                                        echo '';
+                                    }//else
+                                    ?>     ">
                                 </div><!-- input city -->
                             </div><!-- align details -->
                             <div class="align">
@@ -326,41 +345,41 @@ else
                                     <select id="hPropertyDealer" name="hPropertyDealer">
                                         <!--  <option value='' id='hPropertyDealer'></option>                          -->
                                         <!--  <option selected="selected" value="-->
-    <?php
+                                        <?php
 //Populate property dealers datalist
-    $getPropertyDealers = "SELECT `uID`, `uName` from `user` WHERE `rID`= 2";
+                                        $getPropertyDealers = "SELECT `uID`, `uName` from `user` WHERE `rID`= 2";
 
-    $res = $mysqli->query($getPropertyDealers);
+                                        $res = $mysqli->query($getPropertyDealers);
 
-    if ($res->num_rows > 0) {
-        $pds = [];
+                                        if ($res->num_rows > 0) {
+                                            $pds = [];
 
-        while ($row = $res->fetch_assoc()) {
-            array_push($pds, $row);
-        } // while 
+                                            while ($row = $res->fetch_assoc()) {
+                                                array_push($pds, $row);
+                                            } // while 
 //            trace($pds);
-    }//if           
+                                        }//if           
 
 
-    if (isset($house['uName']) && ($_GET['editmode'] == 1) && !isset($_POST['submit'])) {
+                                        if (isset($house['uName']) && ($_GET['editmode'] == 1) && !isset($_POST['submit'])) {
 
 
-        foreach ($pds as $pd) {
-            if ($house['uName'] == $pd['uName']) {
+                                            foreach ($pds as $pd) {
+                                                if ($house['uName'] == $pd['uName']) {
 
-                echo '<option selected=\'selected\' value=\'' . $pd['uID'] . '\'>' . $pd['uName'] . '</option>';
-            } else {
-                echo '<option value= \'' . $pd['uID'] . '\'>' . $pd['uName'] . '</option>';
-            }//else            
-        }//foreach
-    }//if
-    else {
-        foreach ($pds as $pd) {
+                                                    echo '<option selected=\'selected\' value=\'' . $pd['uID'] . '\'>' . $pd['uName'] . '</option>';
+                                                } else {
+                                                    echo '<option value= \'' . $pd['uID'] . '\'>' . $pd['uName'] . '</option>';
+                                                }//else            
+                                            }//foreach
+                                        }//if
+                                        else {
+                                            foreach ($pds as $pd) {
 
-            echo '<option value= \'' . $pd['uID'] . '\'>' . $pd['uName'] . '</option>';
-        }//foreach
-    }//else
-    ?>
+                                                echo '<option value= \'' . $pd['uID'] . '\'>' . $pd['uName'] . '</option>';
+                                            }//foreach
+                                        }//else
+                                        ?>
                                     </select>
                                     </datalist>   
                                 </div><!-- input propertydealer -->
@@ -400,15 +419,15 @@ else
                                 <button type="submit" name="submit" class="btnSubmit" value="submit"  onclick=“return reset();”​>Submit</button>
                                <!--                                    <input type="submit" name="submit" class="btnSubmit" value="submit">                              -->
                             </div><!-- alignBtn -->                                
-    <?php
-} // foreach
-?>  
+                            <?php
+                        } // foreach
+                        ?>  
                 </form><!--/editAddHouse-->
             </section><!--/editAddHouse-->
         </div><!--/container-->    
     </section><!--/mainBody-->
 </main>
-                        <?php include("../includes/footer.php"); ?> 
+<?php include("../includes/footer.php"); ?> 
 
 <script src="<?php echo ROOT; ?>node_modules/jquery/dist/jquery.js"></script>
 <script src="<?php echo ROOT; ?>node_modules/enquire.js/dist/enquire.min.js"></script>
