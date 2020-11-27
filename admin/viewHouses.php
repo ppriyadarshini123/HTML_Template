@@ -211,7 +211,7 @@ if (isset($_SESSION['logNAME'])) {
                                 </div><!--/Details-->
 
                                 <?php
-                                if (isset($_SESSION["IsAdmin"]) && $_SESSION["IsAdmin"] = "1") {
+                                if (isset($_SESSION["IsAdmin"]) && $_SESSION["IsAdmin"] == "1") {
                                     ?>
                                     <div class="alignBtn">                                        
                                         <a href="<?php echo ROOT; ?>admin/addHouse.php?h_id=<?php echo $house['hID']; ?>&editmode=1" class="btnSubmit">Edit House</a>

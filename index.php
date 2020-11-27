@@ -5,6 +5,7 @@
  * url: /index.php
  */
 include("includes/utilities.php");
+include("includes/auth.php");
 
 if ($dbok) {
     // DO NOT FORGET VALIDATION AND SANITATION!!!!    
@@ -62,12 +63,23 @@ if ($dbok) {
         displayMsg('Could not find house or something went wrong.', 'f');
     } # select check
 } ### search logic
-# 
-# 
+
 //   THIS IS THE BEGINNING OF THE MARKUP
 include("includes/top.php");
 include("includes/header.php");
-include("includes/topNav.php");
+
+
+//if user is logged in
+if(isset($_SESSION['logID']))
+{
+    include("includes/signoutNav.php"); 
+//    $successMsg = '<a href = "admin/viewHouses.php">' . "Click here to visit Admin Pages" . '</a>';
+   
+} else {
+    include("includes/topNav.php");
+}//else
+//
+include("includes/feedback.php");
 include("includes/banner.php");
 ?>
 </div><!--/topHeader-->

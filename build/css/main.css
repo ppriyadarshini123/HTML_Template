@@ -2125,7 +2125,10 @@ a
     
     select
     {
-        width: 16vw;
+        width: 8vw;
+        border-color: rgb(118,118,118,118);
+        border-width: 0.1px;
+       
     }
     
     
@@ -2193,6 +2196,8 @@ a
         text-align: center; 
         width:100%;        
     }
+    
+    
 
     .resHouse
     {
@@ -2377,6 +2382,12 @@ a
     .spEmail
     {
 
+    }
+    
+    .feedback .failMsg
+    {
+        text-align: center;
+        padding-bottom: 1vw;
     }
 
     /******************

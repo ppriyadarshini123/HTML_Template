@@ -10,11 +10,11 @@ startSessionOnce();
 
 
 ## 2) checking if user is allowed
-if( !is_logged_in() && !isset($adminPage) ) {
-  $failMsg = "You are not allowed. Click <a 
-    class='boldLink' 
-    href='" . ROOT . "admin/admin.php'>here</a> to login.";
-} // is logged in
+//if( !is_logged_in() && !isset($adminPage) ) {
+//  $failMsg = "You are not allowed. Click <a 
+//    class='boldLink' 
+//    href='" . ROOT . "admin/admin.php'>here</a> to login.";
+//} // is logged in
 
 
 

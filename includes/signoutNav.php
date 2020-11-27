@@ -7,7 +7,6 @@
 ?>
 <nav class="topNav">
     <ul>
-        <li class="homeBorder"><a  href="<?php echo ROOT; ?>index.php">Home</a></li> <!-- class="currentPageLink" -->
-        <li><a href="<?php echo ROOT; ?>index.php">Sign Out</a></li>                
+        <li><a href="<?php echo ROOT; ?>index.php?log=out">Sign Out</a></li>                
     </ul>
 </nav><!--/topNav-->

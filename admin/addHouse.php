@@ -10,6 +10,7 @@ include("../includes/auth.php");
 //   THIS IS THE BEGINNING OF THE MARKUP
 include("../includes/top.php");
 include("../includes/header.php");
+include("../includes/signoutNav.php");
 include("../includes/bottomNav.php");
 
 //SELECT MODE
