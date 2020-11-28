@@ -111,9 +111,9 @@ if (isset($_POST['submit']) && !(isset($_GET['u_id']))) {
             //Insert new user details
             $qInsertUser = "INSERT INTO `user`"
                     . "(`email`, `phone`, `pwd`, `rID`, `uName`)"
-                    . " VALUES ('" . $email . "','" . $phonenumber . "','" . $password . "','" . $rID . "','" . $name ."');";
+                    . " VALUES ('" . $email . "','" . $phonenumber . "','" . SHA1($password) . "','" . $rID . "','" . $name ."');";
 
-            trace($qInsertUser);
+            //trace($qInsertUser);
 
             $dRes = $mysqli->query($qInsertUser);
 
@@ -279,7 +279,7 @@ if (isset($_POST['submit']) && !(isset($_GET['u_id']))) {
                                 </div><!--align email address-->  
                                 <div class="align">
                                     <label for="uPsw">Password :</label>
-                                    <input class="formField" type="text" id="uPsw" name="uPsw" value="<?php
+                                    <input class="formField" type="password" id="uPsw" name="uPsw" value="<?php
                                 if (isset($user['pwd']) && isset($_GET['u_id']) && !isset($_POST['submit'])) {
                                     echo trim($user['pwd']);
                                 } else {

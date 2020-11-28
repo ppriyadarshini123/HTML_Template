@@ -2407,13 +2407,20 @@ a
         color: white;
         padding: 1.5vw;
     }
+    
+    .alignList
+    {
+        width:17%;
+        text-align: left;
+    }
 
     .resUserDetails
     {
         display: flex;
         justify-content: space-around;
-        padding-top: 1vw;
-        padding-bottom: 1vw;
+        padding: 1vw;
+        margin-bottom: 1vw;
+       
     }
 
     .resUser

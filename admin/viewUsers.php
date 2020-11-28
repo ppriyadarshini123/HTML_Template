@@ -48,7 +48,8 @@ if (isset($dbok) && $dbok && !isset($_GET['u_id'])) {
         $qSelectUsers = "SELECT  *                    
                         FROM `user` U 
                         LEFT JOIN  `userroles` UR
-                        ON U.`rID` = UR.`urID`  
+                        ON U.`rID` = UR.`urID`
+                         ORDER BY U.`uName` ASC
                         ";
 
         //trace($qSelectUsers);
@@ -88,71 +89,74 @@ if (isset($dbok) && $dbok && !isset($_GET['u_id'])) {
                     <!-- ====================  FEEDBACK END ===========-->
                     <div class="flexCont"><!--result house-->
                         <div class="resUser">
-                            <div>
+                            <div class="alignList">
                                 <p class="uRole">Role</p>
                             </div><!--user role-->
-                            <div>                                   
+                            <div class="alignList">                                   
                                 <p class="uName">Name</p> 
                             </div><!--/user Name--> 
-                            <div>
+                            <div class="alignList">
                                 <p class="uEmail">Email</p>
                             </div><!--user email-->
-                            <div>                                   
+                            <div class="alignList">                                   
                                 <p class="uPhone">Phone Number</p> 
                             </div><!--/Phone number--> 
-                            <div>                                   
+                            <div class="alignList">                                   
                                 <p class="uPhone"></p> 
                             </div><!--/--> 
-                            <div>                                   
+                            <div class="alignList">                                   
                                 <p class="uPhone"></p> 
                             </div><!--/Phone number--> 
-
                         </div>  <!--/resUser-->  
-    <?php
-    //start the loop
-    if (isset($users) && isset($dbok) && $dbok) {
-        foreach ($users as $user) {
-            ?>
-
+                        <?php
+                        //start the loop
+                        if (isset($users) && isset($dbok) && $dbok) {
+                            foreach ($users as $user) {
+                                ?>
                                 <div class="resUserDetails">
-                                    <div>
+                                    <div class="alignList">
                                         <p class="uRole"><?php echo $user['urRole']; ?></p>
                                     </div><!--user role-->
-                                    <div>                                   
+                                    <div class="alignList">                                   
                                         <p class="uName"><?php echo $user['uName']; ?></p> 
                                     </div><!--/user Name--> 
-                                    <div>
+                                    <div class="alignList">
                                         <p class="uEmail"><?php echo $user['email']; ?></p>
                                     </div><!--user email-->
-                                    <div>                                   
+                                    <div class="alignList">                                   
                                         <p class="uPhone"><?php echo $user['phone']; ?></p> 
                                     </div><!--/Phone number-->  
-            <?php
-            if (isset($_SESSION["IsAdmin"]) && $_SESSION["IsAdmin"] = "1") {
-                ?>
-                                        <div class="alignBtn">   
-                                            
+                                    <?php
+                                    if (isset($_SESSION["IsAdmin"]) && $_SESSION["IsAdmin"] = "1") {
+                                        ?>
+                                        <div class="alignBtn alignList">  
                                             <a href="<?php echo ROOT; ?>admin/addUser.php?u_id=<?php echo $user['uID']; ?>&editmode=1" class="btnSubmit">Edit User</a>
-
-                                        </div><!--/alignBtn-->
-
-                                        <div class="alignBtn"> 
+                                        </div><!--/alignBtn-->                                      
+                                        
+                                        <?php if($user['urRole']!="Admin") { ?>
+                                        <div class="alignBtn alignList"> 
                                             <!--                                        <button type="submit" name="delete" class="btnSubmit" value="Delete User" ​>Delete User</button>-->
                                             <a href="<?php echo ROOT; ?>admin/viewUsers.php?u_id=<?php echo $user['uID']; ?>" class="btnSubmit">Delete User</a>
                                         </div><!--/alignBtn-->
-            <?php } ?>
+                                        <?php 
+                                        
+                                        }//if 
+                                        
+                                        }//if
+                                        ?>
                                 </div><!--/resUserDetails-->
                             </div><!--/flexCont-->  
-            <?php
-        } // foreach
-    } // if $users
-}//if isset u_id
-?>
+                            <?php
+                        } // foreach
+                    } // if $users
+                }//if isset u_id
+                ?>
             </section><!--/searchResults-->
         </div><!--/contain-->
     </section><!--/ mainBody-->
 </main>
-<?php //if user is logged in
+<?php
+//if user is logged in
 if (isset($_SESSION['logID'])) {
     include("../includes/signoutFooter.php");
 //    $successMsg = '<a href = "admin/viewHouses.php">' . "Click here to visit Admin Pages" . '</a>';
