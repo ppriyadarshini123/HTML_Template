@@ -75,8 +75,6 @@ if (isset($_SESSION['logID'])) {
 } else {
     include("includes/topNav.php");
 }//else
-//
-
 include("includes/banner.php");
 ?>
 </div><!--/topHeader-->
@@ -201,8 +199,16 @@ include("includes/banner.php");
         </div><!--/mainBody container-->
     </section><!--/ mainBody-->
 </main>
-<?php include("includes/footer.php"); ?> 
+<?php 
 
+//if user is logged in
+if (isset($_SESSION['logID'])) {
+    include("includes/signoutFooter.php");
+//    $successMsg = '<a href = "admin/viewHouses.php">' . "Click here to visit Admin Pages" . '</a>';
+} else {
+    include("includes/footer.php");
+}//else
+?>
 </div><!--/wrapper-->
 <script src="node_modules/jquery/dist/jquery.js"></script>
 <script src="node_modules/enquire.js/dist/enquire.min.js"></script>

@@ -152,7 +152,14 @@ if (isset($dbok) && $dbok && !isset($_GET['u_id'])) {
         </div><!--/contain-->
     </section><!--/ mainBody-->
 </main>
-<?php include("../includes/footer.php"); ?> 
+<?php //if user is logged in
+if (isset($_SESSION['logID'])) {
+    include("../includes/signoutFooter.php");
+//    $successMsg = '<a href = "admin/viewHouses.php">' . "Click here to visit Admin Pages" . '</a>';
+} else {
+    include("../includes/footer.php");
+}//else
+?>
 </div><!--/ wrapper-->
 <!--/ your JS here-->
 <script src="<?php echo ROOT; ?>node_modules/jquery/dist/jquery.js"></script>

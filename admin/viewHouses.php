@@ -77,7 +77,8 @@ if (isset($dbok) && $dbok && !isset($_GET['h_id'])) {
 if ($dbok && isset($_GET['h_id']) && isset($_SESSION['IsAdmin']) && isset($_SESSION['logID'])) {
 
     $hID = $_GET['h_id'];
-
+    $logID = $_SESSION['logID'];    
+    
     if ($_SESSION['IsAdmin'] == "1") {
 
         //Delete House
@@ -256,7 +257,14 @@ if (isset($_SESSION['logNAME'])) {
         </div><!--/mainBody contain-->
     </section><!--/ mainBody-->
 </main>
-<?php include("../includes/footer.php"); ?> 
+<?php //if user is logged in
+if (isset($_SESSION['logID'])) {
+    include("../includes/signoutFooter.php");
+//    $successMsg = '<a href = "admin/viewHouses.php">' . "Click here to visit Admin Pages" . '</a>';
+} else {
+    include("../includes/footer.php");
+}//else
+?>
 
 <script src="<?php echo ROOT; ?>node_modules/jquery/dist/jquery.js"></script>
 <script src="<?php echo ROOT; ?>node_modules/enquire.js/dist/enquire.min.js"></script>

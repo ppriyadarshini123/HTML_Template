@@ -5,6 +5,7 @@
  * url: /houseDetails.php
  */
 include("includes/utilities.php");
+include("includes/auth.php");
 
 if ($dbok) {
     // DO NOT FORGET VALIDATION AND SANITATION!!!!    
@@ -32,12 +33,18 @@ if ($dbok) {
 
 //    trace($house);
 } else {
-    displayMsg('Could not find house or something went wrong.', 'f');
+    $failMsg = "Could not find house or something went wrong.";
 } # select check# 
 //   THIS IS THE BEGINNING OF THE MARKUP
 include("includes/top.php");
 include("includes/header.php");
-include("includes/topNav.php");
+//if user is logged in
+if (isset($_SESSION['logID'])) {
+    include("includes/signoutNav.php");
+//    $successMsg = '<a href = "admin/viewHouses.php">' . "Click here to visit Admin Pages" . '</a>';
+} else {
+    include("includes/topNav.php");
+}//else
 ?>
 </div><!--/topHeader-->
 </header>
@@ -157,9 +164,32 @@ include("includes/topNav.php");
                     </div><!--/resStreetNameDetails-->
                     <div class="clickedDivFloorPlan" id="clickedDivFloorPlan">
                         <picture>
-                            <source media="(max-width: 768px)" srcset="<?php echo ROOT; ?>build/imgs/<?php echo $house['floorplan']; ?>">
-                            <source media="(min-width: 1200px)" srcset="<?php echo ROOT; ?>build/imgs/<?php echo $house['floorplan']; ?>">
-                            <img src="<?php echo ROOT; ?>build/imgs/<?php echo $house['floorplan']; ?>" width="200" height="200" alt="alt"/> 
+                            <source media="(max-width: 768px)" srcset="<?php echo ROOT; ?>build/imgs/<?php 
+                            if (isset($house['floorplan'])) {
+                                    if($house['floorplan'] == null){
+                                        echo "no-image-359x198.png";                                        
+                                    }else {
+                                        echo $house['floorplan'];                                        
+                                    }//else
+                            }//if
+                             ?>">
+                            <source media="(min-width: 1200px)" srcset="<?php echo ROOT; ?>build/imgs/<?php if (isset($house['floorplan'])) {
+                                    if($house['floorplan'] == null){
+                                        echo "no-image-359x198.png";                                        
+                                    }else {
+                                        echo $house['floorplan'];                                        
+                                    }//else
+                            }//if
+                            ?>">
+                            <img src="<?php echo ROOT; ?>build/imgs/<?php 
+                            if (isset($house['floorplan'])) {
+                                    if($house['floorplan'] == null){
+                                        echo "no-image-359x198.png";                                        
+                                    }else {
+                                        echo $house['floorplan'];                                        
+                                    }//else
+                            }//if
+                                    ?>" width="200" height="200" alt="alt"/> 
                         </picture>
                     </div><!--/clickedDivFloorPlan-->  
                 </section><!--/searchResults-->
@@ -169,7 +199,16 @@ include("includes/topNav.php");
     }
     ?> 
 </main>
-<?php include("includes/footer.php"); ?> 
+<?php 
+
+//if user is logged in
+if (isset($_SESSION['logID'])) {
+    include("includes/signoutFooter.php");
+//    $successMsg = '<a href = "admin/viewHouses.php">' . "Click here to visit Admin Pages" . '</a>';
+} else {
+    include("includes/footer.php");
+}//else
+?> ?> 
 </div><!--/wrapper-->
 <!-- add your JS here-->
 <script src="node_modules/jquery/dist/jquery.js"></script>

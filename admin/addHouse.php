@@ -428,7 +428,14 @@ if (isset($_POST['submit']) && !isset($_GET['h_id'])) {
         </div><!--/container-->    
     </section><!--/mainBody-->
 </main>
-<?php include("../includes/footer.php"); ?> 
+<?php 
+if (isset($_SESSION['logID'])) {
+    include("../includes/signoutFooter.php");
+//    $successMsg = '<a href = "admin/viewHouses.php">' . "Click here to visit Admin Pages" . '</a>';
+} else {
+    include("../includes/footer.php");
+}//else
+?>
 
 <script src="<?php echo ROOT; ?>node_modules/jquery/dist/jquery.js"></script>
 <script src="<?php echo ROOT; ?>node_modules/enquire.js/dist/enquire.min.js"></script>

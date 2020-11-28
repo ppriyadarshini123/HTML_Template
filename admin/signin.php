@@ -5,19 +5,18 @@
  * url: /signin.php
  */
 include("../includes/utilities.php");
+include("../includes/auth.php");
 
 //   THIS IS THE BEGINNING OF THE MARKUP
 include("../includes/top.php");
 include("../includes/header.php");
-    if(isset($_POST['login'])) 
-    {
-        include("../includes/signoutNav.php");
-    }else 
-    {
-        include("../includes/topNav.php");
-    }
+if (isset($_SESSION['logID'])) {
+    include("../includes/signoutNav.php");
+} else {
+    include("../includes/topNav.php");
+}
 
-
+//Sign In Logic & add to favourites logic
 if (isset($dbok) && $dbok && !is_logged_in()) {
 
     include("../includes/topNav.php");
@@ -100,7 +99,16 @@ if (isset($dbok) && $dbok && !is_logged_in()) {
 
                     if ($res->num_rows === 1) {
                         // House is already added as the user'sfavourite
-                        $failMsg = "House already added as your Favourite. " . '<a href = "viewHouses.php">' . "Click here to visit Admin Pages" . '</a>';
+                        
+                        //If the user is a customer or a property dealer, then he should view his favourite houses otherwise admin pages
+                        if($_SESSION('IsAdmin') == 0)
+                        {
+                        $failMsg = "House already added as your Favourite. " . '<a href = "viewHouses.php">' . "Click here to visit your favourite houses" . '</a>';
+                        }
+                        else 
+                        {
+                            $failMsg = "House already added as your Favourite. " . '<a href = "viewHouses.php">' . "Click here to visit Admin Pages" . '</a>';
+                        }
                     }//if
                     else {
                         //house is not already added a a favourite
@@ -113,9 +121,17 @@ if (isset($dbok) && $dbok && !is_logged_in()) {
                         $eRes = $mysqli->query($qinsert);
 
                         if ($mysqli->affected_rows === 1) {
-                            $successMsg = "House added as your Favourite" . '<a href = "viewHouses.php">' . "Click here to visit Admin Pages" . '</a>';
-                        } else {
-                            $failMsg = "Could not add House as favourite" . '<a href = "viewHouses.php">' . "Click here to visit Admin Pages" . '</a>';
+                            //If the user is a customer or a property dealer, then he should view his favourite houses otherwise admin pages
+                        if($_SESSION('IsAdmin') == 0)
+                        {
+                            $successMsg = "House added as your Favourite" . '<a href = "viewHouses.php">' . "Click here to view your favourite houses" . '</a>';
+                        }//if
+                        else
+                        {
+                            $successMsg = "House added as your Favourite" . '<a href = "viewHouses.php">' . "Click here to Admin pages" . '</a>';
+                        }
+                        } else {                            
+                            $failMsg = "Could not add House as favourite" . '<a href = "viewHouses.php">' . "Click here to view your favourite houses" . '</a>';
                         } ### update check
                         //                    header('location:' . ROOT . '' . $page . '');
                     }//else
@@ -128,6 +144,53 @@ if (isset($dbok) && $dbok && !is_logged_in()) {
         } //else
     } //if (isset($_POST['login']))
 } // dbok
+
+//add to favourites logic for a logged in customer
+if (isset($dbok) && $dbok && is_logged_in()) {
+    //add to favourites
+    if (isset($_GET['h_id']) && isset($_GET['page'])) {
+        $page = $_GET['page'];
+        // DO NOT FORGET VALIDATION AND SANITATION!!!!    
+        $keyhouseID = $_GET['h_id'];
+
+        //select - check if the house is already added as a favourite for the user 
+        //- to avoid duplicate data in database
+        $qselect = "SELECT hID, uID FROM " . "`" . DBN . "`.`houseuser` WHERE hID = " . $keyhouseID . " AND uID = " . $_SESSION['logID'] . " ";
+
+//                    trace($qselect);
+
+        $res = $mysqli->query($qselect);
+
+//                    trace($res);
+
+        if ($res->num_rows === 1) {
+            if($_SESSION['IsAdmin'] == 0){
+            // House is already added as the user'sfavourite
+            $failMsg = "House already added as your Favourite. " . '<a href = "viewHouses.php">' . "Click here to view your favourite Houses." . '</a>';
+        }//if
+        else {
+            $failMsg = "House already added as your Favourite. " . '<a href = "viewHouses.php">' . "Click here to visit Admin Pages" . '</a>';
+        }
+        }//if
+        else {
+            //house is not already added a a favourite
+            //Insert into database only if it does not exist
+            $qinsert = " INSERT INTO "
+                    . "`" . DBN . "`.`houseuser`(`hID`, `uID`) 
+                                     VALUES (" . $keyhouseID . "," . $_SESSION['logID'] . ")"
+            ;
+            //trace($qinsert);
+            $eRes = $mysqli->query($qinsert);
+
+            if ($mysqli->affected_rows === 1) {
+                $successMsg = "House added as your Favourite. " . '<a href = "viewHouses.php">' . "Click here to visit Admin Pages" . '</a>';
+            } else {
+                $failMsg = "Could not add House as favourite. " . '<a href = "viewHouses.php">' . "Click here to visit Admin Pages" . '</a>';
+            } ### update check
+            //                    header('location:' . ROOT . '' . $page . '');
+        }//else
+    }//if
+}//if
 ?>
 
 
@@ -142,7 +205,7 @@ if (isset($dbok) && $dbok && !is_logged_in()) {
                 <div class="signin"><!--result product-->
                     <p class="headingCenter">Sign In</p>
                     <!-- ====================  FEEDBACK START =========-->
-                    <?php include("../includes/feedback.php"); ?>
+<?php include("../includes/feedback.php"); ?>
                     <!-- ====================  FEEDBACK END ===========-->
                     <form method="post" action="#" class="fields">
                         <div class="alignSignIn">
@@ -164,7 +227,14 @@ if (isset($dbok) && $dbok && !is_logged_in()) {
         </div><!--/container-->
     </section><!--/ mainBody-->
 </main>
-<?php include("../includes/footer.php"); ?> 
+<?php //if user is logged in
+if (isset($_SESSION['logID'])) {
+    include("../includes/signoutFooter.php");
+//    $successMsg = '<a href = "admin/viewHouses.php">' . "Click here to visit Admin Pages" . '</a>';
+} else {
+    include("../includes/footer.php");
+}//else
+?> ?> 
 
 <!--/ your JS here-->
 <script src="<?php echo ROOT; ?>node_modules/jquery/dist/jquery.js"></script>
