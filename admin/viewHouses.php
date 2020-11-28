@@ -127,7 +127,7 @@ if (isset($_SESSION['logNAME'])) {
                     <div>
                         <p class="uRole">House</p>
                     </div><!--user role-->                               
-                    <div class="alignCenter">                                   
+                    <div class="adjustWidth">                                   
                         <p >House Details</p> 
                     </div><!--/Phone number--> 
                 </div>  <!--/resUser-->

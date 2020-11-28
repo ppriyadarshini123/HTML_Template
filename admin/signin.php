@@ -101,7 +101,7 @@ if (isset($dbok) && $dbok && !is_logged_in()) {
                         // House is already added as the user'sfavourite
                         
                         //If the user is a customer or a property dealer, then he should view his favourite houses otherwise admin pages
-                        if($_SESSION('IsAdmin') == 0)
+                        if($_SESSION('IsAdmin') == "0")
                         {
                         $failMsg = "House already added as your Favourite. " . '<a href = "viewHouses.php">' . "Click here to visit your favourite houses" . '</a>';
                         }
@@ -234,7 +234,7 @@ if (isset($_SESSION['logID'])) {
 } else {
     include("../includes/footer.php");
 }//else
-?> ?> 
+?>
 
 <!--/ your JS here-->
 <script src="<?php echo ROOT; ?>node_modules/jquery/dist/jquery.js"></script>

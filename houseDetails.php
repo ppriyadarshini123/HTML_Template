@@ -208,7 +208,7 @@ if (isset($_SESSION['logID'])) {
 } else {
     include("includes/footer.php");
 }//else
-?> ?> 
+?> 
 </div><!--/wrapper-->
 <!-- add your JS here-->
 <script src="node_modules/jquery/dist/jquery.js"></script>

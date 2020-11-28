@@ -283,7 +283,7 @@ a
     {
         background-color: #358016;
         color: #FFFFFF;
-        padding: 5vw; 
+        padding: 0.5vw; 
         letter-spacing: .2vw;
         font-family: parkside, cursive;
         font-weight: 100;
@@ -339,6 +339,7 @@ a
         margin-bottom: 3vw;
         margin-top: 3vw;
         width:100%;
+        font-size: 5vw;
     }
     .hStreet, .hDetails, .hPD
     {
@@ -528,11 +529,12 @@ a
     .resUserDetails
     {
         display: flex;
-        justify-content: space-evenly;
+        justify-content: space-around;
         padding-top: 1vw;
         padding-bottom: 1vw;
         font-size: 3vw;
         line-height: 6vw;
+        margin-bottom: 1vw;
     }
 
     .resHouseTitle
@@ -543,6 +545,10 @@ a
                 color: white;
                 padding: 1.5vw;*/
         display: none;
+    }
+    .alignList
+    {
+        
     }
 
     .resUser
@@ -916,7 +922,7 @@ a
         font-family: parkside, cursive;
         font-weight: 100;
         font-style: normal;
-        font-size: 20px;
+        font-size: 2.2vw;
         border: 1px transparent solid;        
     }
     .btnSubmit:hover
@@ -970,6 +976,7 @@ a
         margin-bottom: 1vw;
         margin-top: 3vw;
         width:44%;
+        font-size: 2vw;
     }
     .hStreet, .hDetails, .hPD
     {
@@ -1161,6 +1168,7 @@ a
         justify-content: space-around;
         padding-top: 1vw;
         padding-bottom: 1vw;
+        margin-bottom: 1vw;
     }
 
     .resUser
@@ -1170,6 +1178,12 @@ a
         background-color: #358016;
         color: white;
         padding: 1.5vw;
+    }
+    
+    .alignList
+    {
+        width:17%;
+        text-align: left;
     }
 
     .uRole
@@ -1555,7 +1569,8 @@ a
 
     .resHouse
     {
-        display: flex;        
+        display: flex;   
+        justify-content: center;
     }
 
     .indexSubmit
@@ -1575,6 +1590,7 @@ a
         margin-bottom: 1vw;
         margin-top: 3vw;
         width:50%;
+        font-size: 2vw;
     }
     .hStreet, .hDetails, .hPD
     {
@@ -1753,8 +1769,8 @@ a
     {
         display: flex;
         justify-content: space-around;
-        padding-top: 1vw;
-        padding-bottom: 1vw;
+        padding: 1vw;
+        margin-bottom: 1vw;
     }
 
     .resUser
@@ -1764,6 +1780,12 @@ a
         background-color: #358016;
         color: white;
         padding: 1.5vw;
+    }
+    
+    .alignList
+    {
+        width:17%;
+        text-align: left;
     }
 
     .resHouseTitle
@@ -1880,36 +1902,9 @@ a
      *  FEEDBACK  SECTION
      ***********************************/
     .feedback{
-        color:#fff;
-        padding:20px 0;
+        
     }
-    .successMsg, .failMsg{
-        padding:15px 20px;
-        font-size:14px;
-        font-weight: 300;
-        margin:20px 0;
-        letter-spacing: .8px;
-    }
-
-    .successMsg{
-        background-color: darkgreen;
-        border:5px solid darkgreen;        
-        background-position: right;
-        background-repeat: no-repeat;
-        background-size: contain;
-        padding-left: 20px;
-    }
-
-    .failMsg{
-        background-color: red;
-        border:5px solid red;
-        background-image: url("../../build/imgs/nope.png");
-        background-position: right;
-        background-repeat: no-repeat;
-        background-size: contain;
-        padding-left: 20px;
-    }
-
+    
 
     /******************
      *  FOOTER  SECTION
@@ -2394,9 +2389,15 @@ a
      *  VIEW USERS/HOUSES PAGE
      ******************/
 
+    
     .searchResults
     {
 
+    }
+    
+    .adjustWidth
+    {
+        width: 50%;
     }
 
     .resHouseTitle
