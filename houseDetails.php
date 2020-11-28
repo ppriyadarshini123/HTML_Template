@@ -61,27 +61,24 @@ include("includes/topNav.php");
                             <div class="carousel-item active">  
                                 <img class="d-block w-100"  src="<?php echo ROOT; ?>build/imgs/<?php
                                 if (isset($house['image'])) {
-                                    echo(explode(";", $house['image'])[0]); //explode is a string function to break the string from ; into arrays                                        
-                                } else {
-                                    echo "no-image-359x198.png";
+                                    if($house['image']==null){echo "no-image-359x198.png";}
+                                    else {echo(explode(";", $house['image'])[0]);} //explode is a string function to break the string from ; into arrays                                        
                                 } //explode is a string function to break the string from ; into arrays                                       
                                 ?>" alt="First slide">                               
                             </div><!-- carousel-item active-->
                             <div class="carousel-item">
                                 <img class="d-block w-100"  src="<?php echo ROOT; ?>build/imgs/<?php
                                 if (isset($house['image'])) {
-                                    echo(explode(";", $house['image'])[1]); //explode is a string function to break the string from ; into arrays                                        
-                                } else {
-                                    echo "no-image-359x198.png";
+                                    if($house['image']==null){echo "no-image-359x198.png";}
+                                    else{echo(explode(";", $house['image'])[1]);} //explode is a string function to break the string from ; into arrays                                        
                                 } //explode is a string function to break the string from ; into arrays                                        
                                 ?>" alt="Second slide">                             
                             </div><!-- carousel-item-->
                             <div class="carousel-item">
                                 <img class="d-block w-100"  src="<?php echo ROOT; ?>build/imgs/<?php
-                                if (isset($house['image'])) {
-                                    echo(explode(";", $house['image'])[2]); //explode is a string function to break the string from ; into arrays                                        
-                                } else {
-                                    echo "no-image-359x198.png";
+                                 if (isset($house['image'])) {
+                                    if($house['image']==null){echo "no-image-359x198.png";}
+                                    else{echo(explode(";", $house['image'])[2]);} //explode is a string function to break the string from ; into arrays                                        
                                 } //explode is a string function to break the string from ; into arrays                                        
                                 ?>" alt="Third slide">                                
                             </div><!-- carousel-item-->

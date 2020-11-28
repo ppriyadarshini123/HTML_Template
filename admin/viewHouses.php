@@ -12,7 +12,8 @@ include("../includes/top.php");
 include("../includes/header.php");
 include("../includes/signoutNav.php");
 
-if ($_SESSION['IsAdmin'] == "1") include("../includes/bottomNav.php");
+if ($_SESSION['IsAdmin'] == "1")
+    include("../includes/bottomNav.php");
 
 //SELECT QUERY
 if (isset($dbok) && $dbok && !isset($_GET['h_id'])) {
@@ -76,9 +77,9 @@ if (isset($dbok) && $dbok && !isset($_GET['h_id'])) {
 if ($dbok && isset($_GET['h_id']) && isset($_SESSION['IsAdmin']) && isset($_SESSION['logID'])) {
 
     $hID = $_GET['h_id'];
-    
+
     if ($_SESSION['IsAdmin'] == "1") {
-        
+
         //Delete House
         //delete mode: for Admin: Delete house from database
         //             for property dealer and customer: Remove as favourite
@@ -90,7 +91,6 @@ if ($dbok && isset($_GET['h_id']) && isset($_SESSION['IsAdmin']) && isset($_SESS
         //For customer and property dealer - Remove as favourite        
         $qDELETE = "DELETE FROM `houseuser` WHERE hID = " . $hID . " AND uID= " . $logID;
     }//else
-
     //trace($qDELETE);
     $dRes = $mysqli->query($qDELETE);
 
@@ -99,7 +99,6 @@ if ($dbok && isset($_GET['h_id']) && isset($_SESSION['IsAdmin']) && isset($_SESS
     } else {
         $failMsg = "Could not delete house or house already deleted.";
     } #### delete check
-
 }//if
 ?>
 </div><!--/topHeader-->
@@ -142,35 +141,46 @@ if (isset($_SESSION['logNAME'])) {
                             <picture>
             <!--                                    <source media="(max-width: 359px)" srcset="<?php echo ROOT; ?>build/imgs/<?php
                 if (isset($house['image'])) {
-                    echo $house['image'];
-                } else {
-                    echo "no-image-359x198.png";
-                }
+                    if ($house['image'] == null) {
+                        echo "no-image-359x198.png";
+                    } else {
+                        global $house;
+                        echo(explode(";", $house['image'])[0]); //explode is a string function to break the string from ; into arrays                                        
+                    }//else
+                }//if 
                         ?>">
                                         <source media="(max-width: 768px)" srcset="<?php echo ROOT; ?>build/imgs/<?php echo ROOT; ?>build/imgs/<?php
                         if (isset($house['image'])) {
-                            echo $house['image'];
-                        } else {
-                            echo "no-image-432x239.png";
-                        }
+                            if ($house['image'] == null) {
+                                echo "no-image-359x198.png";
+                            } else {
+                                global $house;
+                                echo(explode(";", $house['image'])[0]); //explode is a string function to break the string from ; into arrays                                        
+                            }//else
+                        }//if 
                         ?>">
                                         <source media="(min-width: 1200px)" srcset="<?php echo ROOT; ?>build/imgs/<?php echo ROOT; ?>build/imgs/<?php
                         if (isset($house['image'])) {
-                            echo $house['image'];
-                        } else {
-                            echo "no-image-432x239.png";
-                        }
+                            if ($house['image'] == null) {
+                                echo "no-image-359x198.png";
+                            } else {
+                                global $house;
+                                echo(explode(";", $house['image'])[0]); //explode is a string function to break the string from ; into arrays                                        
+                            }//else
+                        }//if                         
                         ?>">-->
 
 
                                 <img src="<?php echo ROOT; ?>build/imgs/<?php
-                        if (isset($house['image'])) {
-                            global $house;
-                            echo(explode(";", $house['image'])[0]); //explode is a string function to break the string from ; into arrays                                        
-                        } else {
-                            echo "no-image-359x198.png";
-                        }
-                        ?>" class="mobile"  title="Click for House Details"
+                                if (isset($house['image'])) {
+                                    if ($house['image'] == null) {
+                                        echo "no-image-359x198.png";
+                                    } else {
+                                        global $house;
+                                        echo(explode(";", $house['image'])[0]); //explode is a string function to break the string from ; into arrays                                        
+                                    }//else
+                                }//if 
+                                ?>" class="mobile"  title="Click for House Details"
                                      alt="Click for House Details">
                             </picture>
                             <div class="resStreetName">
@@ -187,46 +197,53 @@ if (isset($_SESSION['logNAME'])) {
                                 </div><!--house for rent/sale-->
                                 <div>
                                     <p class="hPrice">Price: £ <?php
-                                if (isset($house['price'])) {
-                                    echo $house['price'];
-                                } else
-                                    echo '--';
+                                        if (isset($house['price'])) {
+                                            echo $house['price'];
+                                        } else
+                                            echo '--';
                                         ?></p>
                                 </div><!--price-->
                                 <div>                                   
                                     <p class="hStreet"><?php
-                                if (isset($house['housenumber'])) {
-                                    echo "{$house['housenumber']},{$house['streetname']},{$house['city']},{$house['postcode']}";
-                                } else
-                                    echo '--';
+                                        if (isset($house['housenumber'])) {
+                                            echo "{$house['housenumber']},{$house['streetname']},{$house['city']},{$house['postcode']}";
+                                        } else
+                                            echo '--';
                                         ?></p> 
                                 </div><!--/Street Name-->  
                                 <div>                                   
                                     <p class="hDetails"><?php
-                                if (isset($house['details'])) {
-                                    echo $house['details'];
-                                } else
-                                    echo '--';
+                                        if (isset($house['details'])) {
+                                            echo $house['details'];
+                                        } else
+                                            echo '--';
                                         ?></p>
                                 </div><!--/Details-->
 
-                                <?php
-                                if (isset($_SESSION["IsAdmin"]) && $_SESSION["IsAdmin"] == "1") {
-                                    ?>
-                                    <div class="alignBtn">                                        
-                                        <a href="<?php echo ROOT; ?>admin/addHouse.php?h_id=<?php echo $house['hID']; ?>&editmode=1" class="btnSubmit">Edit House</a>
-                                    </div><!--/alignBtn-->
 
-                                    <div class="alignBtn"> 
-                                        <a href="<?php echo ROOT; ?>admin/viewHouses.php?h_id=<?php echo $house['hID']; ?>&isAdmin=<?php $isAdmin ?>" class="btnSubmit">Delete House</a>
-                                    </div><!--/alignBtn-->
-                                <?php } else { ?>
 
-                                    <div class="alignBtn">                            
-                                        <!--                                    <button class="btnSubmit" name="submit">Add to Favourites</button>-->
-                                        <a href="<?php echo ROOT; ?>admin/viewHouses.php?h_id=<?php echo $house['hID']; ?>&isAdmin=<?php $isAdmin ?>" class="btnSubmit">Remove House as Favourite</a>
-                                    </div><!--/alignBtn-->
-                                <?php } ?>
+
+                                <div class="flexAlignInline">                                
+
+                                    <?php
+                                    if (isset($_SESSION["IsAdmin"]) && $_SESSION["IsAdmin"] == "1") {
+                                        ?>
+                                        <div class="alignBtnFav">                                        
+                                            <a href="<?php echo ROOT; ?>admin/addHouse.php?h_id=<?php echo $house['hID']; ?>&editmode=1" class="btnSubmit">Edit House</a>
+                                        </div><!--/alignBtn-->
+
+                                        <div class="alignBtnFav"> 
+                                            <a href="<?php echo ROOT; ?>admin/viewHouses.php?h_id=<?php echo $house['hID']; ?>&isAdmin=<?php $isAdmin ?>" class="btnSubmit">Delete House</a>
+                                        </div><!--/alignBtn-->
+                                    <?php } else { ?>
+
+                                        <div class="alignBtnFav">                           
+                                            <!--                                    <button class="btnSubmit" name="submit">Add to Favourites</button>-->
+                                            <a href="<?php echo ROOT; ?>admin/viewHouses.php?h_id=<?php echo $house['hID']; ?>&isAdmin=<?php $isAdmin ?>" class="btnSubmit">Remove House as Favourite</a>
+                                        </div><!--/alignBtn-->
+                                    <?php } ?>
+
+                                </div><!--/flexAlignInline-->
 
                             </div><!--/resStreetName-->
                         </div>  <!--/resHouse-->  
